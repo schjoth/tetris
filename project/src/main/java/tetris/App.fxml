@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="530.0" prefWidth="675.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16">
+<AnchorPane prefHeight="530.0" prefWidth="621.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="tetris.AppController">
    <children>
-      <GridPane hgap="1.0" layoutX="97.0" layoutY="30.0" prefHeight="471.0" prefWidth="230.0" style="-fx-border-width: 1; -fx-border-color: black;" vgap="1.0">
+      <GridPane hgap="1.0" layoutX="132.0" layoutY="30.0" prefHeight="471.0" prefWidth="230.0" style="-fx-border-width: 1; -fx-border-color: black;" vgap="1.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -44,5 +48,33 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
+      <Label layoutX="436.0" layoutY="53.0" text="Tetris">
+         <font>
+            <Font size="43.0" />
+         </font>
+      </Label>
+      <Label layoutX="444.0" layoutY="115.0" text="Top 5 Scores:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="484.0" layoutY="151.0" text="0" />
+      <Label layoutX="484.0" layoutY="168.0" text="0" />
+      <Label layoutX="484.0" layoutY="185.0" text="0" />
+      <Label layoutX="484.0" layoutY="202.0" text="0" />
+      <Label layoutX="484.0" layoutY="219.0" text="0" />
+      <Button fx:id="startGame" layoutX="446.0" layoutY="254.0" mnemonicParsing="false" onMouseClicked="#handleStartGame" prefWidth="83.0" text="Start Game!" />
+      <Label layoutX="36.0" layoutY="44.0" text="SCORE:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="51.0" layoutY="85.0" text="0">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Label>
+      <Label layoutX="22.0" layoutY="194.0" text="NEXT BLOCK:" />
+      <TextArea layoutX="10.0" layoutY="219.0" prefHeight="77.0" prefWidth="103.0" />
    </children>
 </AnchorPane>
