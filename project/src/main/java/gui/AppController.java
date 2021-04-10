@@ -1,7 +1,6 @@
-package tetris;
+package gui;
 
 import java.net.URL;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -11,10 +10,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import logic.HandleHighScores;
+import persistance.FileOperations;
 
 public class AppController implements Initializable {
 	
@@ -62,8 +61,9 @@ public class AppController implements Initializable {
 	public void handleStartGame() {
 		System.out.println("Start game!");
 		gameRunning = true;
-		userScore += 1;
+		userScore += 1; //Bare for å teste score-label intill videre.
 		currentScore.setText(""+ userScore);
+		highScoreHandler.saveHighScores();
 		}
 	
 	@FXML
