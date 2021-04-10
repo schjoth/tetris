@@ -2,9 +2,10 @@ package shape;
 
 public class SquareShape implements Shape {
 	
+	private String color = null;
+
 	@Override
 	public String getColor() {
-		// TODO finn hex verdis
-		return null;
+		return color;
 	}
 }
