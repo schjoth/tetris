@@ -2,7 +2,7 @@ package shape;
 
 public class LShape implements Shape {
 	
-	private String color = null;
+	private final String color = null;
 
 	@Override
 	public String getColor() {
