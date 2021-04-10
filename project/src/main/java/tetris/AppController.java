@@ -13,13 +13,23 @@ public class AppController {
     @FXML private Button handleStartGame;
     @FXML private TextField userNameField;
     @FXML private Label currentPlayerField;
+    @FXML private Label currentScore;
 	
     private String userName;
+    private Boolean gameRunning = false;
+    private int userScore;
     
 	@FXML
 	public void handleStartGame() {
-		System.out.println("Start game!");	
+		System.out.println("Start game!");
+		gameRunning = true;
 		}
+	
+	
+	@FXML
+	public void deleteLines() {
+		
+	}
 	
 	@FXML
 	public void userNameSubmit() {
