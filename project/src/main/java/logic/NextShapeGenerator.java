@@ -12,18 +12,18 @@ import shape.TShape;
 import shape.ZShape;
 
 public class NextShapeGenerator {
-	public static Shape getNextShape() {
+	public static Shape getNextShape(int columnLength) {
 		Shape shape = null;
 		
 		int number = new Random().nextInt(7);
 		switch (number) {
-			case 0: shape = new IShape();
-			case 1: shape = new JShape();
-			case 2: shape = new LShape();
-			case 3: shape = new SquareShape();
-			case 4: shape = new SShape();
-			case 5: shape = new TShape();
-			case 6: shape = new ZShape();
+			case 0: shape = new IShape(columnLength);
+			case 1: shape = new JShape(columnLength);
+			case 2: shape = new LShape(columnLength);
+			case 3: shape = new SquareShape(columnLength);
+			case 4: shape = new SShape(columnLength);
+			case 5: shape = new TShape(columnLength);
+			case 6: shape = new ZShape(columnLength);
 		}
 		return shape;
 	}

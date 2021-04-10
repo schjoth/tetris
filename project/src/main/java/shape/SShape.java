@@ -1,11 +1,18 @@
 package shape;
 
-public class SShape implements Shape {
-	
-	private final String color = "#72CB3B";
+import java.util.ArrayList;
+import java.util.Arrays;
 
-	@Override
-	public String getColor() {
-		return color;
+public class SShape extends Shape {
+	
+	private static final String color = "#72CB3B";
+
+	public SShape (int columnLength) {
+		super(color,
+				new ArrayList<Integer>(Arrays.asList(0, 1, columnLength, columnLength - 1)),
+				new ArrayList<Integer>(Arrays.asList(0, columnLength, columnLength + 1, columnLength * 2 + 1)),
+				new ArrayList<Integer>(Arrays.asList(0, 1, columnLength, columnLength - 1)),
+				new ArrayList<Integer>(Arrays.asList(0, columnLength, columnLength + 1, columnLength * 2 + 1))
+		);
 	}
 }

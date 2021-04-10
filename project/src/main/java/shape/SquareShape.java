@@ -1,11 +1,18 @@
 package shape;
 
-public class SquareShape implements Shape {
-	
-	private final String color = "#FFD500";
+import java.util.ArrayList;
+import java.util.Arrays;
 
-	@Override
-	public String getColor() {
-		return color;
+public class SquareShape extends Shape {
+	
+	private static final String color = "#FFD500";
+
+	public SquareShape (int columnLength) {
+		super(color,
+				new ArrayList<Integer>(Arrays.asList(0, 1, columnLength, columnLength + 1)),
+				new ArrayList<Integer>(Arrays.asList(0, 1, columnLength, columnLength + 1)),
+				new ArrayList<Integer>(Arrays.asList(0, 1, columnLength, columnLength + 1)),
+				new ArrayList<Integer>(Arrays.asList(0, 1, columnLength, columnLength + 1))
+		);
 	}
 }
