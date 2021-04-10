@@ -60,11 +60,11 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <Label layoutX="475.0" layoutY="326.0" text="0" />
-            <Label layoutX="475.0" layoutY="301.0" text="0" />
-            <Label layoutX="475.0" layoutY="274.0" text="0" />
-            <Label layoutX="475.0" layoutY="249.0" text="0" />
-            <Label layoutX="474.0" layoutY="220.0" text="0" />
+            <Label fx:id="fifthPlace" layoutX="475.0" layoutY="326.0" text="0" />
+            <Label fx:id="fourthPlace" layoutX="475.0" layoutY="301.0" text="0" />
+            <Label fx:id="thirdPlace" layoutX="475.0" layoutY="274.0" text="0" />
+            <Label fx:id="secondPlace" layoutX="475.0" layoutY="249.0" text="0" />
+            <Label fx:id="firstPlace" layoutX="474.0" layoutY="220.0" text="0" />
             <Button fx:id="handleStartGame" layoutX="438.0" layoutY="381.0" mnemonicParsing="false" onMouseClicked="#handleStartGame" prefWidth="83.0" text="Start Game!" />
             <Label layoutX="25.0" layoutY="57.0" text="SCORE:">
                <font>
