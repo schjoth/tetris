@@ -5,7 +5,15 @@ public class Coordinates {
 	private int y;
 	
 	public Coordinates(int x, int y) {
-		this.x = x;
+		this.setX(x);
+		this.setY(y);
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
 		this.y = y;
 	}
 
@@ -13,8 +21,8 @@ public class Coordinates {
 		return x;
 	}
 
-	public int getY() {
-		return y;
+	public void setX(int x) {
+		this.x = x;
 	}
 
 }

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
+import coordinates.Coordinates;
+import javafx.scene.layout.GridPane;
+
 public class IShape implements Shape {
 	
 	private final String color = "#00FFFF";
@@ -17,7 +20,7 @@ public class IShape implements Shape {
 		this.vertical = new ArrayList<Integer>(Arrays.asList(0, -columnLength, -2*columnLength, -3*columnLength));
 		this.currentDirection = this.vertical;
 	}
-
+	
 	@Override
 	public String getColor() {
 		return color;
