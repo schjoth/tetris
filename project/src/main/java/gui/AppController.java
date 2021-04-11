@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import logic.HandleHighScores;
 import logic.Score;
+import shape.Shape;
 
 public class AppController implements Initializable {
 	
@@ -33,6 +34,7 @@ public class AppController implements Initializable {
     private String userName;
     private int userScore;
     HandleHighScores highScoreHandler;
+    private Shape shape;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {

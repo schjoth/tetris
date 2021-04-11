@@ -27,5 +27,4 @@ public class persistanceTest {
 		List<Score> scores = handler.getHighScores();
 		assertNotEquals(0, scores.size());
 	}
-	
 }
