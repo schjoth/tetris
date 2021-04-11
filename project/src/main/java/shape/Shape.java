@@ -1,16 +1,15 @@
 package shape;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class Shape {
 	
 	private String color;
 	private String currentDirectionString;
+	private Map<String, Collection<Integer>> directions;
 	private Collection<Integer> currentDirection;
-	private Collection<Integer> up;
-	private Collection<Integer> right;
-	private Collection<Integer> down;
-	private Collection<Integer> left;
 
 	public Shape (String color, 
 			Collection<Integer> up,
@@ -18,12 +17,16 @@ public abstract class Shape {
 			Collection<Integer> down,
 			Collection<Integer> left) {
 		this.color = color;
-		this.up = up;
-		this.right = right;
-		this.down = down;
-		this.left = left;
-		this.currentDirection = this.up;
-		this.currentDirectionString = "up";
+		
+		directions = new HashMap<>();
+		directions.put("up", up);
+		directions.put("right", right);
+		directions.put("down", down);
+		directions.put("left", left);
+		
+		currentDirectionString = "up";
+		currentDirection = directions.get(currentDirectionString);
+		
 	}
 	
 	/**
@@ -51,26 +54,12 @@ public abstract class Shape {
 	 */
 	public void rotateLeft() {
 		switch (currentDirectionString) {
-			case "up": {
-				currentDirection = this.left;
-				currentDirectionString = "left";
-			}
-		
-			case "left": {
-				currentDirection = this.down;
-				currentDirectionString = "down";
-			}
-			
-			case "down": {
-				currentDirection = this.right;
-				currentDirectionString = "right";
-			}
-			
-			case "right": {
-				currentDirection = this.up;
-				currentDirectionString = "up";
+			case "up": currentDirectionString = "left";
+			case "left": currentDirectionString = "down";
+			case "down": currentDirectionString = "right";
+			case "right": currentDirectionString = "up";
 		}
-	}
+		currentDirection = directions.get(currentDirectionString);
 	};
 	
 	/**
@@ -78,25 +67,11 @@ public abstract class Shape {
 	 */
 	public void rotateRight() {
 		switch (currentDirectionString) {
-			case "up": {
-				currentDirection = this.right;
-				currentDirectionString = "right";
-			}
-		
-			case "right": {
-				currentDirection = this.down;
-				currentDirectionString = "down";
-			}
-			
-			case "down": {
-				currentDirection = this.left;
-				currentDirectionString = "left";
-			}
-			
-			case "left": {
-				currentDirection = this.up;
-				currentDirectionString = "up";
-			}
+			case "up": currentDirectionString = "right";
+			case "right": currentDirectionString = "down";
+			case "down": currentDirectionString = "left";
+			case "left": currentDirectionString = "up";	
 		}
+		currentDirection = directions.get(currentDirectionString);
 	}
 }

@@ -1,13 +1,18 @@
 package logic;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import coordinates.Coordinates;
+import coordinates.CoordinatesCalculator;
 import shape.Shape;
 
 public class Board {
 	
 	private int posX, posY, startPosX, startPosY;
+	private Shape currentShape;
 	
 	//hver block blir representert ved fargen sin som en string
 	private List<List<String>> board = new ArrayList<>();
@@ -29,29 +34,68 @@ public class Board {
 		System.out.println(board);
 	}
 
-	/*	
-	for (index : getShapeIndexes()) {
-		Coordinates coo = CoordinatesCalculator(CoordinatesCalcuator.calulateIndex(currenctPos) + index);
-		GridPane.add(coo.getX())
-	}
-	*/
-	
 	public void moveRight() {
+		//TODO: valider
+		updatePlacement(true);
 		posX++;
+		
+		updatePlacement(false);
 	}
 	
 	public void moveLeft() {
+		//TODO: valider
+		updatePlacement(true);
 		posX--;
+		
+		updatePlacement(false);
 	}
 	
 	public void moveDown() {
 		//TODO sjekk om den treffer noe under
-		posY++;
+		boolean spaceBelow = Coordinates.getCoorinatesForShape(currentShape, posX, posY + 1, getColumnLength()).stream()
+			.map(coo -> getTile(coo.getX(), coo.getY()) == null)
+			.reduce((a,b) -> a || b)
+			.get();
+		
+		if (posY == getRowLength() - 1 && !spaceBelow) {
+			insertNewBlock();
+		} else {
+			updatePlacement(true);
+			posY++;
+		}
+		updatePlacement(false);
 	}
 	
-	public void insertNewBlock(Shape shape) {
+	public void hardDrop() {
+		updatePlacement(true);
+		int i = posY;
+		while (i < getRowLength()) {
+			i++;
+			boolean spaceBelow = Coordinates.getCoorinatesForShape(currentShape, posX, i, getColumnLength()).stream()
+				.map(coo -> getTile(coo.getX(), coo.getY()) == null)
+				.reduce((a,b) -> a || b)
+				.get();
+			if (spaceBelow == false) {
+				i--;
+				break;
+			}
+		}
+		posY = i;
+		updatePlacement(false);
+		insertNewBlock();
+	}
+	
+	private void updatePlacement(boolean deleteTrace) {
+		Coordinates.getCoorinatesForShape(currentShape, posX, posY, getColumnLength())
+			.forEach(coo -> board.get(coo.getY())
+				.set(coo.getX(),
+					deleteTrace ? null : currentShape.getColor()));
+	}
+	
+	private void insertNewBlock() {
 		posX = startPosX;
 		posY = startPosY;
+		currentShape = NextShapeGenerator.getNextShape(getColumnLength());
 	}
 	
 	public int getPosX() {
@@ -68,5 +112,9 @@ public class Board {
 	
 	public int getRowLength() {
 		return board.size();
+	}
+	
+	public String getTile(int posX, int posY) {
+		return board.get(posY).get(posX);
 	}
 }
