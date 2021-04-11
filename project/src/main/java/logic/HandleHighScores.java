@@ -43,7 +43,7 @@ public class HandleHighScores  {
 		}
 	}
 	
-	public void getHighScoresFromFile() {
-		highscores = FileOperations.readFromFile();
+	public void getHighScoresFromFile(String path) {
+		highscores = FileOperations.readFromFile(path);
 	}	
 }

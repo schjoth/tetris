@@ -15,18 +15,18 @@ public class FileOperations {
 	public static FileWriter file;
 	
 	
-	public static List<Score> readFromFile() {
+	public static List<Score> readFromFile(String path) {
 		List<Score> highscores = new ArrayList<Score>();
 		try {
 		    // create object mapper instance
 		    ObjectMapper mapper = new ObjectMapper();
 
 		    // convert JSON file to map
-		    highscores = Arrays.asList(mapper.readValue(Paths.get("src/main/resources/highscores.json").toFile(), Score[].class));
+		    highscores = Arrays.asList(mapper.readValue(Paths.get(path).toFile(), Score[].class));
 
 		    // print map entriess
+	    	System.out.println("Top 5 scores: ");
 		    for (Score entry : highscores) {
-		    	System.out.println("Top 5 scores: ");
 		        System.out.println(entry.getName() + " = " + entry.getScore());
 		    }
 

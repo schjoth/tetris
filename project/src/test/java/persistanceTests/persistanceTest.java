@@ -23,7 +23,7 @@ public class persistanceTest {
 	public void readFromFile() {
 		
 		HandleHighScores handler = new HandleHighScores();
-		handler.getHighScoresFromFile("src/test/java");
+		handler.getHighScoresFromFile("src/test/resources/testScores.json");
 		List<Score> scores = handler.getHighScores();
 		assertNotEquals(0, scores.size());
 	}
