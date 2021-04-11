@@ -1,11 +1,9 @@
 package gui;
 
-import java.net.URL;
+import java.net.URL; 
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 
-import coordinates.Coordinates;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -13,7 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import logic.HandleHighScores;
-import persistance.FileOperations;
+import logic.Score;
 
 public class AppController implements Initializable {
 	
@@ -30,9 +28,9 @@ public class AppController implements Initializable {
 	@FXML private Label fourthPlace;
 	@FXML private Label fifthPlace;
     
-    private Coordinates currentPos;
-    private String userName;
+//    private Coordinates currentPos;
     private Boolean gameRunning;
+    private String userName;
     private int userScore;
     HandleHighScores highScoreHandler;
     
@@ -64,16 +62,19 @@ public class AppController implements Initializable {
 		userScore += 1; //Bare for å teste score-label intill videre.
 		currentScore.setText(""+ userScore);
 		highScoreHandler.saveHighScores();
+		
 		}
 	
 	@FXML
 	public void updateScores() {
-		List<Map<String, String>> newScores = highScoreHandler.getHighScores();
-		firstPlace.setText(newScores.get(0).get("name")  + ": " + newScores.get(0).get("score"));
-		secondPlace.setText(newScores.get(1).get("name")  + ": " + newScores.get(1).get("score"));
-		thirdPlace.setText(newScores.get(2).get("name")  + ": " + newScores.get(2).get("score"));
-		fourthPlace.setText(newScores.get(3).get("name")  + ": " + newScores.get(3).get("score"));
-		fifthPlace.setText(newScores.get(4).get("name")  + ": " + newScores.get(4).get("score"));
+		highScoreHandler.getHighScoresFromFile();
+		List<Score> newScores = highScoreHandler.getHighScores();
+		System.out.println(newScores);
+		firstPlace.setText(newScores.get(0).getName()  + ": " + newScores.get(0).getScore());
+		secondPlace.setText(newScores.get(1).getName()  + ": " + newScores.get(1).getScore());
+		thirdPlace.setText(newScores.get(2).getName()  + ": " + newScores.get(2).getScore());
+		fourthPlace.setText(newScores.get(3).getName()  + ": " + newScores.get(3).getScore());
+		fifthPlace.setText(newScores.get(4).getName()  + ": " + newScores.get(4).getScore());
         }
 	
 	@FXML

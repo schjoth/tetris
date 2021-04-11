@@ -1,27 +1,48 @@
 package persistance;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.FileWriter; 
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-
-import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import logic.Score;
 
 public class FileOperations {
 
 	public static FileWriter file;
 	
 	
-	public void readFromFile() {
-		
+	public static List<Score> readFromFile() {
+		List<Score> highscores = new ArrayList<Score>();
+		try {
+		    // create object mapper instance
+		    ObjectMapper mapper = new ObjectMapper();
+
+		    // convert JSON file to map
+		    highscores = Arrays.asList(mapper.readValue(Paths.get("src/main/resources/highscores.json").toFile(), Score[].class));
+
+		    // print map entriess
+		    for (Score entry : highscores) {
+		        System.out.println(entry.getName() + "=" + entry.getScore());
+		    }
+
+		} catch (Exception ex) {
+		    ex.printStackTrace();
+		}
+		return highscores;
 	}
 	
-	public static void writeToFile(List<Map<String, String>> highscores) throws JsonGenerationException, JsonMappingException, IOException {
+	public static void writeToFile(List<Score> highscores) throws JsonMappingException {
 		// create object mapper instance
 	    ObjectMapper mapper = new ObjectMapper();
-	    mapper.writeValue(Paths.get("src/main/resources/highscores.json").toFile(), highscores);
+	    try {
+			mapper.writeValue(Paths.get("src/main/resources/highscores.json").toFile(), highscores);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
