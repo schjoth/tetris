@@ -63,7 +63,7 @@ public class AppController implements Initializable {
 		gameRunning = true;
 		userScore += 1; //Bare for å teste score-label intill videre.
 		currentScore.setText(""+ userScore);
-		highScoreHandler.saveHighScores();
+		highScoreHandler.saveHighScores("src/main/resources/highscores.json");
 		
 		}
 	

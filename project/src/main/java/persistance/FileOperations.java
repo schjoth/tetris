@@ -36,11 +36,11 @@ public class FileOperations {
 		return highscores;
 	}
 	
-	public static void writeToFile(List<Score> highscores) throws JsonMappingException {
+	public static void writeToFile(List<Score> highscores, String path) throws JsonMappingException {
 		// create object mapper instance
 	    ObjectMapper mapper = new ObjectMapper();
 	    try {
-			mapper.writeValue(Paths.get("src/main/resources/highscores.json").toFile(), highscores);
+			mapper.writeValue(Paths.get(path).toFile(), highscores);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

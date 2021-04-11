@@ -18,14 +18,14 @@ public class HandleHighScores  {
 	}
 	
 	
-	public List<Score> updateScore(String name, int contenderScore) {
+	public List<Score> updateScore(String name, int contenderScore, String path) {
 		Score score = new Score(name, contenderScore);
 		highscores.add(score);
 		Collections.sort(highscores);
 		if (highscores.size() > 5) {
 			highscores.remove(highscores.size()-1);			
 		}
-		saveHighScores();
+		saveHighScores(path);
 		return highscores;
 	}
 	
@@ -34,9 +34,9 @@ public class HandleHighScores  {
 		
 	}
 	
-	public void saveHighScores() {
+	public void saveHighScores(String path) {
 		try {
-			FileOperations.writeToFile(highscores);
+			FileOperations.writeToFile(highscores, path);
 			System.out.println("Succecssssssscscscscsc");
 		} catch (JsonMappingException e) {
 			e.printStackTrace();
