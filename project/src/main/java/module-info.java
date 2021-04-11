@@ -5,4 +5,5 @@ open module todolist {
 	requires javafx.graphics;
 	requires com.fasterxml.jackson.databind;
 	requires com.fasterxml.jackson.annotation;
+	requires org.junit.jupiter.api;
 }

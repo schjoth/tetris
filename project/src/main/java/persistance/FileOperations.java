@@ -26,7 +26,8 @@ public class FileOperations {
 
 		    // print map entriess
 		    for (Score entry : highscores) {
-		        System.out.println(entry.getName() + "=" + entry.getScore());
+		    	System.out.println("Top 5 scores: ");
+		        System.out.println(entry.getName() + " = " + entry.getScore());
 		    }
 
 		} catch (Exception ex) {

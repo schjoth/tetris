@@ -67,7 +67,7 @@ public class AppController implements Initializable {
 	
 	@FXML
 	public void updateScores() {
-		highScoreHandler.getHighScoresFromFile();
+		highScoreHandler.getHighScoresFromFile("src/main/resources/highscores.json");
 		List<Score> newScores = highScoreHandler.getHighScores();
 		System.out.println(newScores);
 		firstPlace.setText(newScores.get(0).getName()  + ": " + newScores.get(0).getScore());
