@@ -10,13 +10,9 @@ public class HandleHighScores  {
 	
 	private List<Score> highscores = new ArrayList<>();
 	
-	
-	// Fileoperations.readFromFile(); typ
-	
 	public HandleHighScores() {
 
 	}
-	
 	
 	public List<Score> updateScore(String name, int contenderScore, String path) {
 		Score score = new Score(name, contenderScore);
@@ -30,14 +26,13 @@ public class HandleHighScores  {
 	}
 	
 	public List<Score> getHighScores() {
-		return highscores;
-		
+		return highscores;	
 	}
 	
 	public void saveHighScores(String path) {
 		try {
 			FileOperations.writeToFile(highscores, path);
-			System.out.println("Succecssssssscscscscsc");
+			System.out.println("Successfully saved!");
 		} catch (JsonMappingException e) {
 			e.printStackTrace();
 		}
