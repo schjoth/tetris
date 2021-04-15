@@ -51,7 +51,6 @@ public class Board {
 	}
 	
 	public void moveDown() {
-		//TODO sjekk om den treffer noe under
 		boolean spaceBelow = Coordinates.getCoorinatesForShape(currentShape, posX, posY + 1, getColumnLength()).stream()
 			.map(coo -> getTile(coo.getX(), coo.getY()) == null)
 			.reduce((a,b) -> a || b)
