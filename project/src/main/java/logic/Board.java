@@ -72,7 +72,7 @@ public class Board {
 			i++;
 			boolean spaceBelow = Coordinates.getCoorinatesForShape(currentShape, posX, i, getColumnLength()).stream()
 				.map(coo -> getTile(coo.getX(), coo.getY()) == null)
-				.reduce((a,b) -> a || b)
+				.reduce((a,b) -> a && b)
 				.get();
 			if (spaceBelow == false) {
 				i--;
