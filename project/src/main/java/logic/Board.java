@@ -91,7 +91,7 @@ public class Board {
 					deleteTrace ? null : currentShape.getColor()));
 	}
 	
-	private void insertNewBlock() {
+	public void insertNewBlock() {
 		posX = startPosX;
 		posY = startPosY;
 		currentShape = NextShapeGenerator.getNextShape(getColumnLength());
@@ -115,5 +115,9 @@ public class Board {
 	
 	public String getTile(int posX, int posY) {
 		return board.get(posY).get(posX);
+	}
+	
+	public List<List<String>> getBoard() {
+		return board;
 	}
 }

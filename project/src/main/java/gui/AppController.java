@@ -3,13 +3,24 @@ package gui;
 import java.net.URL; 
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.util.Duration;
+import logic.Board;
 import logic.HandleHighScores;
 import logic.Score;
 import shape.Shape;
@@ -19,6 +30,7 @@ public class AppController implements Initializable {
 	@FXML private AnchorPane userPage;
     @FXML private AnchorPane gamePage;
 	@FXML private AnchorPane activePane;
+	@FXML private GridPane gameGrid;
     @FXML private Button handleStartGame;
     @FXML private TextField userNameField;
     @FXML private Label currentPlayerField;
@@ -28,8 +40,10 @@ public class AppController implements Initializable {
 	@FXML private Label thirdPlace;
 	@FXML private Label fourthPlace;
 	@FXML private Label fifthPlace;
+	
     
 //    private Coordinates currentPos;
+	private Board board;
     private Boolean gameRunning;
     private String userName;
     private int userScore;
@@ -59,20 +73,27 @@ public class AppController implements Initializable {
     
 	@FXML
 	public void handleStartGame() {
+		board = new Board(10, 20);
 		System.out.println("Start game!");
-		gameRunning = true;
-		userScore += 1; //Bare for å teste score-label intill videre.
-		currentScore.setText(""+ userScore);
 		highScoreHandler.saveHighScores("src/main/resources/highscores.json");
-		
-		}
+		gameRunning = true;
+		currentScore.setText(""+ userScore);
+		board.insertNewBlock();
+		Timeline myTimeLine = new Timeline(new KeyFrame(Duration.seconds(0.3), ev -> {
+        	board.moveDown();
+        	updateGrid();
+        	System.out.println("hello world");
+	       }));
+		myTimeLine.setCycleCount(Animation.INDEFINITE);
+	    myTimeLine.play();
+	}		
 	
 	@FXML
 	public void updateScores() {
 		highScoreHandler.getHighScoresFromFile("src/main/resources/highscores.json");
 		List<Score> newScores = highScoreHandler.getHighScores();
 		System.out.println(newScores);
-				
+		
 		firstPlace.setText(newScores.size() >= 1 ? newScores.get(0).getName()  + ": " + newScores.get(0).getScore() : "-");
 		secondPlace.setText(newScores.size() >= 2 ? newScores.get(1).getName()  + ": " + newScores.get(1).getScore() : "-");
 		thirdPlace.setText(newScores.size() >= 3 ? newScores.get(2).getName()  + ": " + newScores.get(2).getScore() : "-");
@@ -85,25 +106,58 @@ public class AppController implements Initializable {
 		
 	}
 		
-	@FXML
-	public void moveRight() {
+	
+	private void moveRight() {
+		board.moveRight();
+	}
+	
+	
+	private void moveLeft() {
+		board.moveLeft();
+	}
+	
+	
+	private void hardDrop() {
+		board.hardDrop();
+	}
+	
+	
+	private void rotateShape() {
 		
 	}
 	
-	@FXML
-	public void moveLeft() {
-		
+	@FXML 
+	public void handleKeyPressed(KeyEvent e) {
+		switch (e.getCode()) {
+			case LEFT: moveLeft();
+			case RIGHT: moveRight();
+			case DOWN: hardDrop();
+			case UP: rotateShape();
+		default:
+			break;
+		}
 	}
 	
-	@FXML
-	public void rotateShape() {
-		
+	public void updateGrid() {
+		gameGrid.getChildren().clear();
+		System.out.println("updating grid");
+		System.out.println("getrows: "+ gameGrid.getRowCount());
+		System.out.println("getrows: "+ gameGrid.getColumnCount());
+		for (int y = 0; y < gameGrid.getRowCount(); y++) {
+			for (int x = 0; x < gameGrid.getColumnCount(); x++) {
+				String color = board.getTile(x, y);
+				StackPane pane = new StackPane();
+				pane.setStyle("-fx-background-color: " + color);
+				GridPane.setFillHeight(pane, true);
+				GridPane.setFillWidth(pane, true);
+				gameGrid.add(pane, x, y);				
+			}
+		}
 	}
 	
 	@FXML
 	public void gameOver() {
-		
+		this.gameRunning = false;
 	}
-	
 	
 }

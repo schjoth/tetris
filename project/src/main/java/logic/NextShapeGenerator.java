@@ -25,6 +25,7 @@ public class NextShapeGenerator {
 			case 5: shape = new TShape(columnLength);
 			case 6: shape = new ZShape(columnLength);
 		}
+		System.out.println(shape);
 		return shape;
 	}
 }

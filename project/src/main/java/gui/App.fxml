@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="530.0" prefWidth="621.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AppController">
+<AnchorPane onKeyPressed="#handleKeyPressed" prefHeight="530.0" prefWidth="621.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AppController">
    <children>
       <AnchorPane fx:id="gamePage" prefHeight="530.0" prefWidth="621.0">
          <children>
-            <GridPane hgap="1.0" layoutX="139.0" layoutY="31.0" prefHeight="471.0" prefWidth="230.0" style="-fx-border-width: 1; -fx-border-color: black;" vgap="1.0">
+            <GridPane fx:id="gameGrid" hgap="1.0" layoutX="139.0" layoutY="31.0" prefHeight="471.0" prefWidth="230.0" style="-fx-border-width: 1; -fx-border-color: black;" vgap="1.0">
               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -66,18 +66,18 @@
             <Label fx:id="secondPlace" layoutX="475.0" layoutY="249.0" text="0" />
             <Label fx:id="firstPlace" layoutX="474.0" layoutY="220.0" text="0" />
             <Button fx:id="handleStartGame" layoutX="438.0" layoutY="381.0" mnemonicParsing="false" onMouseClicked="#handleStartGame" prefWidth="83.0" text="Start Game!" />
-            <Label layoutX="25.0" layoutY="57.0" text="SCORE:">
+            <Label layoutX="51.0" layoutY="57.0" text="SCORE:">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <Label fx:id="currentScore" layoutX="40.0" layoutY="83.0" text="0">
+            <Label fx:id="currentScore" layoutX="66.0" layoutY="84.0" text="0">
                <font>
                   <Font size="35.0" />
                </font>
             </Label>
-            <Label layoutX="12.0" layoutY="229.0" text="NEXT BLOCK:" />
-            <TextArea layoutY="266.0" prefHeight="77.0" prefWidth="103.0" />
+            <Label layoutX="37.0" layoutY="229.0" text="NEXT BLOCK:" />
+            <TextArea disable="true" layoutX="25.0" layoutY="271.0" prefHeight="77.0" prefWidth="103.0" />
             <Label fx:id="currentPlayerField" layoutX="463.0" layoutY="105.0" text="Label" />
          </children>
       </AnchorPane>
