@@ -160,7 +160,7 @@ public class AppController implements Initializable {
 				gameGrid.add(pane, x, y);				
 			}
 		}
-		showNext();
+		//showNext();
 	}
 	
 	@FXML

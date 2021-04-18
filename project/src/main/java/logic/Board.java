@@ -23,7 +23,7 @@ public class Board {
 		startPosX = columnLength / 2;
 		posX = startPosX;
 		posY = startPosY;
-		nextShape = NextShapeGenerator.getNextShape(getColumnLength());
+		nextShape = NextShapeGenerator.getNextShape(columnLength);
 
 		while (board.size() < rowLength) {
 			List<String> list = new ArrayList<>();
