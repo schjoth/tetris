@@ -97,7 +97,7 @@ public class Board {
 		Coordinates.getCoorinatesForShape(currentShape, posX, posY, getColumnLength())
 			.forEach(coo -> board.get(coo.getY())
 				.set(coo.getX(),
-					deleteTrace ? null : currentShape.getColor()));
+					deleteTrace ? null : currentShape.color));
 	}
 	
 	
