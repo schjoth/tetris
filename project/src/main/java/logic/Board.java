@@ -14,6 +14,7 @@ public class Board {
 	private int posX, posY, startPosX, startPosY;
 	private Shape currentShape;
 	private Shape nextShape;
+	private int score;
 	
 	//hver block blir representert ved fargen sin som en string
 	private List<List<String>> board = new ArrayList<>();
@@ -106,10 +107,29 @@ public class Board {
 	}
 	
 	public void insertNewBlock() {
+		checkForClearedLines();
 		posX = startPosX;
 		posY = startPosY;
 		currentShape = nextShape;
 		nextShape = NextShapeGenerator.getNextShape(getColumnLength());
+	}
+	
+	private void checkForClearedLines() {
+		for (int i = 0; i > getRowLength(); i++) {
+			List<String> row = board.get(i);
+			if (row.stream().map(color -> color != null).reduce((b,c) -> b || c).get())  {
+				//TODO remove line, and move everything one line down
+				board.remove(i);
+				
+				List<String> list = new ArrayList<>();
+				while (list.size() < getColumnLength()) {
+					list.add(null);
+				}
+				board.add(0, list);
+				
+				score += 10;
+			}
+		}
 	}
 	
 	public int getPosX() {
@@ -134,5 +154,9 @@ public class Board {
 	
 	public List<List<String>> getBoard() {
 		return board;
+	}
+	
+	public int getScore() {
+		return score;
 	}
 }
