@@ -132,15 +132,19 @@ public class AppController implements Initializable {
 		System.out.println(e.getCode());
 		if (e.getCode().equals(KeyCode.A)) {
 			moveLeft();
+			updateGrid();
 		}
 		if (e.getCode().equals(KeyCode.S)) {
 			hardDrop();
+			updateGrid();
 		}
 		if (e.getCode().equals(KeyCode.D)) {
 			moveRight();
+			updateGrid();
 		}
 		if (e.getCode().equals(KeyCode.W)) {
 			rotateShape();
+			updateGrid();
 		} else {
 			return;
 		}
