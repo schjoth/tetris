@@ -33,8 +33,6 @@ public class Board {
 			}
 			board.add(list);
 		}
-		
-		System.out.println(board);
 	}
 
 	public void moveRight() {
@@ -115,10 +113,11 @@ public class Board {
 	}
 	
 	private void checkForClearedLines() {
-		for (int i = 0; i > getRowLength(); i++) {
+		for (int i = 0; i < getRowLength(); i++) {
 			List<String> row = board.get(i);
-			if (row.stream().map(color -> color != null).reduce((b,c) -> b || c).get())  {
-				//TODO remove line, and move everything one line down
+			System.out.println(board.get(i));
+			if (row.stream().map(color -> color != null).reduce((b,c) -> b && c).get())  {
+				
 				board.remove(i);
 				
 				List<String> list = new ArrayList<>();
