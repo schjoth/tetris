@@ -129,7 +129,6 @@ public class AppController implements Initializable {
 	@FXML 
 	public void handleKeyPressed(KeyEvent e) {
 		System.out.println(e.getCode());
-		System.out.println(e.getCode().getClass());
 		if (e.getCode().equals(KeyCode.A)) {
 			moveLeft();
 		}

@@ -9,7 +9,7 @@ public class TShape extends Shape{
 
 	public TShape (int columnLength) {
 		super(color,
-				new ArrayList<Integer>(Arrays.asList(-1, 0, -columnLength, + 1)),
+				new ArrayList<Integer>(Arrays.asList(columnLength-1, columnLength, 0, columnLength + 1)),
 				new ArrayList<Integer>(Arrays.asList(-columnLength, 0, 1, columnLength)),
 				new ArrayList<Integer>(Arrays.asList(-1, 0, columnLength, + 1)),
 				new ArrayList<Integer>(Arrays.asList(-columnLength, 0, -1, columnLength))
