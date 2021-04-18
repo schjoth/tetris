@@ -25,6 +25,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import logic.Board;
@@ -55,6 +56,14 @@ public class AppController implements Initializable {
 	@FXML private Label thirdPlace;
 	@FXML private Label fourthPlace;
 	@FXML private Label fifthPlace;
+	@FXML private Pane JLabel;
+	@FXML private Pane ILabel;
+	@FXML private Pane SLabel;
+	@FXML private Pane SquareLabel;
+	@FXML private Pane ZLabel;
+	@FXML private Pane TLabel;
+	@FXML private Pane LLabel;
+	
 	
     
 //    private Coordinates currentPos;
@@ -182,29 +191,25 @@ public class AppController implements Initializable {
 	
 	@FXML
 	public void showNext() {
-		nextBlock.getChildren().clear();
-		Shape shape = null;
+		JLabel.setVisible(false);
+		ILabel.setVisible(false);
+		SLabel.setVisible(false);
+		SquareLabel.setVisible(false);
+		TLabel.setVisible(false);
+		ZLabel.setVisible(false);
+		LLabel.setVisible(false);
+		
 		
 		switch(board.getNextShape().color) {
-		case JShape.color: shape = new JShape(nextBlock.getColumnCount()); break;
-		case IShape.color: shape = new IShape(nextBlock.getColumnCount()); break;
-		case SShape.color: shape = new SShape(nextBlock.getColumnCount()); break;
-		case SquareShape.color: shape = new SquareShape(nextBlock.getColumnCount()); break;
-		case TShape.color: shape = new TShape(nextBlock.getColumnCount()); break;
-		case ZShape.color: shape = new ZShape(nextBlock.getColumnCount()); break;
-		case LShape.color: shape = new LShape(nextBlock.getColumnCount()); break;
+		case JShape.color: JLabel.setVisible(true);  break;
+		case IShape.color: ILabel.setVisible(true); break;
+		case SShape.color: SLabel.setVisible(true);  break;
+		case SquareShape.color: SquareLabel.setVisible(true);  break;
+		case TShape.color: TLabel.setVisible(true); break;
+		case ZShape.color: ZLabel.setVisible(true); break;
+		case LShape.color: LLabel.setVisible(true);  break;
 		}
 		
-		Collection<Integer> indexes = shape.getShapeIndexes();
-		
-		for (int index : indexes) {
-			Coordinates nextCo = CoordinatesCalculator.calcuateCoordinates(index, nextBlock.getColumnCount());
-			StackPane pane = new StackPane();
-			pane.setStyle("-fx-background-color: " + board.getNextShape().color);
-			GridPane.setFillHeight(pane, true);
-			GridPane.setFillWidth(pane, true);
-			nextBlock.add(pane, nextCo.getX() + 4, nextCo.getY() + 2);
-		}
 	}
 	
 	@FXML

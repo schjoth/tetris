@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class TShape extends Shape{
 
-	public static final String color = "BF00FF";
+	public static final String color = "#BF00FF";
 
 	public TShape (int columnLength) {
 		super(color,
