@@ -55,8 +55,9 @@ public class Board {
 	
 	public void moveDown() {
 		
-		boolean spaceBelow = checkSpaceY(posY  + 1);
+		score++;
 		
+		boolean spaceBelow = checkSpaceY(posY  + 1);
 		if (!spaceBelow) {
 			updatePlacement(false);
 			insertNewBlock();
