@@ -79,10 +79,9 @@ public class AppController implements Initializable {
 		gameRunning = true;
 		currentScore.setText(""+ userScore);
 		board.insertNewBlock();
-		Timeline myTimeLine = new Timeline(new KeyFrame(Duration.seconds(0.3), ev -> {
+		Timeline myTimeLine = new Timeline(new KeyFrame(Duration.seconds(0.5), ev -> {
         	board.moveDown();
         	updateGrid();
-        	System.out.println("hello world");
 	       }));
 		myTimeLine.setCycleCount(Animation.INDEFINITE);
 	    myTimeLine.play();
@@ -128,21 +127,20 @@ public class AppController implements Initializable {
 	
 	@FXML 
 	public void handleKeyPressed(KeyEvent e) {
+		System.out.println(e.getCode());
 		switch (e.getCode()) {
-			case LEFT: moveLeft();
-			case RIGHT: moveRight();
-			case DOWN: hardDrop();
-			case UP: rotateShape();
+			case A: moveLeft();
+			case D: moveRight();
+			case S: hardDrop();
+			case W: rotateShape();
 		default:
 			break;
 		}
+		updateGrid();
 	}
 	
 	public void updateGrid() {
 		gameGrid.getChildren().clear();
-		System.out.println("updating grid");
-		System.out.println("getrows: "+ gameGrid.getRowCount());
-		System.out.println("getrows: "+ gameGrid.getColumnCount());
 		for (int y = 0; y < gameGrid.getRowCount(); y++) {
 			for (int x = 0; x < gameGrid.getColumnCount(); x++) {
 				String color = board.getTile(x, y);

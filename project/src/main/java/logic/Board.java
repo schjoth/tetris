@@ -55,7 +55,7 @@ public class Board {
 			.reduce((a,b) -> a || b)
 			.get();
 		
-		if (posY == getRowLength() - 1 && !spaceBelow) {
+		if (posY == getRowLength() - 1 || !spaceBelow) {
 			insertNewBlock();
 		} else {
 			updatePlacement(true);
