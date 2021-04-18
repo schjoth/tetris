@@ -6,7 +6,7 @@ import java.util.Map;
 
 public abstract class Shape {
 	
-	private String color;
+	public final String color;
 	private String currentDirectionString;
 	private Map<String, Collection<Integer>> directions;
 	private Collection<Integer> currentDirection;
@@ -28,16 +28,6 @@ public abstract class Shape {
 		currentDirection = directions.get(currentDirectionString);
 		
 	}
-	
-	/**
-	 * Returns the color of the shape
-	 * 
-	 * @return color as hexadecimal
-	 */
-	public String getColor() {
-		return color;
-	}
-	
 	
 	/**
 	 * Get the shapes as a collection of integers relative to the current index in the board

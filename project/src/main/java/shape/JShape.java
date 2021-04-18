@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class JShape extends Shape{
 
-	private final static String color = "#0341AE";
+	public final static String color = "#0341AE";
 	
 	public JShape (int columnLength) {
 		super(color,

@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class SShape extends Shape {
 	
-	private static final String color = "#72CB3B";
+	public static final String color = "#72CB3B";
 
 	public SShape (int columnLength) {
 		super(color,

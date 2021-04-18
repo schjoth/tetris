@@ -1,11 +1,17 @@
 package gui;
 
-import java.net.URL; 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import coordinates.Coordinates;
+import coordinates.CoordinatesCalculator;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -24,7 +30,14 @@ import javafx.util.Duration;
 import logic.Board;
 import logic.HandleHighScores;
 import logic.Score;
+import shape.IShape;
+import shape.JShape;
+import shape.LShape;
+import shape.SShape;
 import shape.Shape;
+import shape.SquareShape;
+import shape.TShape;
+import shape.ZShape;
 
 public class AppController implements Initializable {
 	
@@ -164,21 +177,33 @@ public class AppController implements Initializable {
 				gameGrid.add(pane, x, y);				
 			}
 		}
-		//showNext();
+		showNext();
 	}
 	
 	@FXML
 	public void showNext() {
 		nextBlock.getChildren().clear();
-		for (int y = 0; y < nextBlock.getRowCount(); y++) {
-			for (int x = 0; x < nextBlock.getColumnCount(); x++) {
-				String color = board.getTile(x, y);
-				StackPane nextPane = new StackPane();
-				nextPane.setStyle("-fx-background-color: " + color);
-				GridPane.setFillHeight(nextPane, true);
-				GridPane.setFillWidth(nextPane, true);
-				nextBlock.add(nextPane, x, y);				
-			}
+		Shape shape = null;
+		
+		switch(board.getNextShape().color) {
+		case JShape.color: shape = new JShape(nextBlock.getColumnCount()); break;
+		case IShape.color: shape = new IShape(nextBlock.getColumnCount()); break;
+		case SShape.color: shape = new SShape(nextBlock.getColumnCount()); break;
+		case SquareShape.color: shape = new SquareShape(nextBlock.getColumnCount()); break;
+		case TShape.color: shape = new TShape(nextBlock.getColumnCount()); break;
+		case ZShape.color: shape = new ZShape(nextBlock.getColumnCount()); break;
+		case LShape.color: shape = new LShape(nextBlock.getColumnCount()); break;
+		}
+		
+		Collection<Integer> indexes = shape.getShapeIndexes();
+		
+		for (int index : indexes) {
+			Coordinates nextCo = CoordinatesCalculator.calcuateCoordinates(index, nextBlock.getColumnCount());
+			StackPane pane = new StackPane();
+			pane.setStyle("-fx-background-color: " + board.getNextShape().color);
+			GridPane.setFillHeight(pane, true);
+			GridPane.setFillWidth(pane, true);
+			nextBlock.add(pane, nextCo.getX() + 4, nextCo.getY() + 2);
 		}
 	}
 	
