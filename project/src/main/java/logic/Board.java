@@ -40,6 +40,8 @@ public class Board {
 	}
 
 	public void moveRight(int distance ) {
+		updatePlacement(true);
+		
 		boolean isSpaceAvailable = checkSpaceX(posX + distance);
 		if (isSpaceAvailable) posX += distance;
 		else {
@@ -53,6 +55,8 @@ public class Board {
 	}
 	
 	public void moveLeft(int distance) {
+		updatePlacement(true);
+		
 		boolean isSpaceAvailable = checkSpaceX(posX - distance);
 		if (isSpaceAvailable) posX -= distance;
 		else {
@@ -68,6 +72,7 @@ public class Board {
 	public void moveDown(int distance) {
 		score += distance;
 		
+		updatePlacement(true);
 		boolean spaceBelow = checkSpaceY(posY + distance);
 		if (!spaceBelow) {
 			updatePlacement(false);
@@ -79,6 +84,7 @@ public class Board {
 	}
 	
 	public void hardDrop() {
+		updatePlacement(true);
 		int i = posY;
 		while (i < getRowLength()) {
 			i++;
@@ -87,6 +93,8 @@ public class Board {
 				break;
 			}
 		}
+		score += (i - posY) * 10;
+		
 		posY = i;
 		updatePlacement(false);
 		insertNewBlock();
@@ -94,7 +102,6 @@ public class Board {
 	
 	private Boolean checkSpaceY(int y) {
 		try {
-			updatePlacement(true);
 			boolean spaceBelow = Coordinates.getCoorinatesForShape(currentShape, posX, y, getColumnLength()).stream()
 				.map(coo -> getTile(coo.getX(), coo.getY()) == null || coo.getY() == getColumnLength())
 				.reduce((a,b) -> a && b)
@@ -108,8 +115,6 @@ public class Board {
 	
 	private Boolean checkSpaceX(int x) {
 		try {
-			updatePlacement(true);
-			
 			Collection<Coordinates> allCoordinates = Coordinates.getCoorinatesForShape(currentShape, x, posY, getColumnLength());
 			
 			boolean isSpaceAvailable = allCoordinates.stream()
@@ -130,10 +135,14 @@ public class Board {
 	
 	
 	private void updatePlacement(boolean deleteTrace) {
+		try {
 		Coordinates.getCoorinatesForShape(currentShape, posX, posY, getColumnLength())
 			.forEach(coo -> board.get(coo.getY())
 				.set(coo.getX(),
 					deleteTrace ? null : currentShape.color));
+		} catch (IndexOutOfBoundsException e) {
+			
+		}
 	}
 	
 	
@@ -150,6 +159,7 @@ public class Board {
 	}
 	
 	private void checkForClearedLines() {
+		int numberOfClearedLines = 0;
 		for (int i = 0; i < getRowLength(); i++) {
 			List<String> row = board.get(i);
 			if (row.stream().map(color -> color != null).reduce((b,c) -> b && c).get())  {
@@ -161,7 +171,8 @@ public class Board {
 				}
 				board.add(0, list);
 				
-				score += 10;
+				numberOfClearedLines++;
+				score += numberOfClearedLines * 100;
 			}
 		}
 	}
