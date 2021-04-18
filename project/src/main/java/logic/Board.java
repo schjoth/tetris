@@ -1,6 +1,6 @@
 package logic;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +15,7 @@ public class Board {
 	private Shape currentShape;
 	private Shape nextShape;
 	private int score;
+	private boolean gameOver;
 	
 	//hver block blir representert ved fargen sin som en string
 	private List<List<String>> board = new ArrayList<>();
@@ -137,6 +138,10 @@ public class Board {
 		posY = startPosY;
 		currentShape = nextShape;
 		nextShape = NextShapeGenerator.getNextShape(getColumnLength());
+		
+		if (!checkSpaceX(posY) && !checkSpaceY(posX)) {
+			gameOver = true;
+		};
 	}
 	
 	private void checkForClearedLines() {
@@ -154,6 +159,10 @@ public class Board {
 				score += 10;
 			}
 		}
+	}
+	
+	public boolean gameOver() {
+		return gameOver;
 	}
 	
 	public int getPosX() {
