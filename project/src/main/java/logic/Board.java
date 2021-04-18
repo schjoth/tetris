@@ -100,8 +100,6 @@ public class Board {
 				.map(coo -> getTile(coo.getX(), coo.getY()) == null || coo.getY() == getColumnLength())
 				.reduce((a,b) -> a && b)
 				.get();     
-			System.out.println(spaceBelow);
-			Coordinates.getCoorinatesForShape(currentShape, posX, y, getColumnLength()).forEach(co -> System.out.println(co.getX() + "," + co.getY()));
 			if (spaceBelow == false) throw new IllegalStateException();
 		} catch (IndexOutOfBoundsException | IllegalStateException e) {
 			return false;
@@ -123,7 +121,6 @@ public class Board {
 			
 			Collection<Integer> xValues = allCoordinates.stream().map(Coordinates::getX).collect(Collectors.toList());
 			boolean presentInBothBorders = xValues.contains(0) && xValues.contains(getColumnLength() - 1);
-			System.out.println(isSpaceAvailable +"+"+ presentInBothBorders );		
 			if (isSpaceAvailable == false || presentInBothBorders) throw new IllegalStateException();
 		} catch (IndexOutOfBoundsException | IllegalStateException e) {
 			return false;
@@ -148,8 +145,6 @@ public class Board {
 		checkForClearedLines();
 		posX = startPosX;
 		posY = startPosY;
-		System.out.println(posX);
-		System.out.println(posY);
 		currentShape = nextShape;
 		nextShape = NextShapeGenerator.getNextShape(getColumnLength());
 		
