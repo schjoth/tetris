@@ -52,32 +52,23 @@ public class Board {
 	}
 	
 	public void moveDown() {
-		boolean spaceBelow = Coordinates.getCoorinatesForShape(currentShape, posX, posY + 1, getColumnLength()).stream()
-			.map(coo -> getTile(coo.getX(), coo.getY()) == null)
-			.reduce((a,b) -> a || b)
-			.get();
 		
-		if (posY == getRowLength() - 1 || !spaceBelow) {
+		boolean spaceBelow = checkSpaceY(posY  + 1);
+		
+		if (!spaceBelow) {
+			updatePlacement(false);
 			insertNewBlock();
 		} else {
-			updatePlacement(true);
 			posY++;
 		}
 		updatePlacement(false);
 	}
 	
 	public void hardDrop() {
-		updatePlacement(true);
 		int i = posY;
 		while (i < getRowLength()) {
 			i++;
-			try {
-				boolean spaceBelow = Coordinates.getCoorinatesForShape(currentShape, posX, i, getColumnLength()).stream()
-					.map(coo -> getTile(coo.getX(), coo.getY()) == null)
-					.reduce((a,b) -> a && b)
-					.get();
-				if (spaceBelow == false) throw new IllegalStateException();
-			} catch (IndexOutOfBoundsException | IllegalStateException e) {
+			if (!checkSpaceY(i)) {
 				i--;
 				break;
 			}
@@ -86,6 +77,21 @@ public class Board {
 		updatePlacement(false);
 		insertNewBlock();
 	}
+	
+	private Boolean checkSpaceY(int y) {
+		try {
+			updatePlacement(true);
+			boolean spaceBelow = Coordinates.getCoorinatesForShape(currentShape, posX, y, getColumnLength()).stream()
+				.map(coo -> getTile(coo.getX(), coo.getY()) == null || coo.getY() == getColumnLength())
+				.reduce((a,b) -> a && b)
+				.get();
+			if (spaceBelow == false) throw new IllegalStateException();
+		} catch (IndexOutOfBoundsException | IllegalStateException e) {
+			return false;
+		}
+		return true;
+	}
+	
 	
 	private void updatePlacement(boolean deleteTrace) {
 		Coordinates.getCoorinatesForShape(currentShape, posX, posY, getColumnLength())
