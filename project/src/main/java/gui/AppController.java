@@ -99,6 +99,7 @@ public class AppController implements Initializable {
 	public void handleStartGame() {
 		board = new Board(10, 20);
 		System.out.println("Start game!");
+		gameGrid.setGridLinesVisible(true);
 		highScoreHandler.saveHighScores("src/main/resources/highscores.json");
 		gameRunning = true;
 		currentScore.setText(""+ userScore);
@@ -190,7 +191,6 @@ public class AppController implements Initializable {
 		showNext();
 	}
 	
-	@FXML
 	public void showNext() {
 		JLabel.setVisible(false);
 		ILabel.setVisible(false);
@@ -213,9 +213,10 @@ public class AppController implements Initializable {
 		
 	}
 	
-	@FXML
 	public void gameOver() {
 		this.gameRunning = false;
+		userScore = board.getScore();
+		highScoreHandler.updateScore(currentPlayerField.getText(), userScore, "src/main/resources/highscores.json");
 	}
 	
 }
