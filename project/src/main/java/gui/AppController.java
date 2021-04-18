@@ -32,6 +32,7 @@ public class AppController implements Initializable {
     @FXML private AnchorPane gamePage;
 	@FXML private AnchorPane activePane;
 	@FXML private GridPane gameGrid;
+	@FXML private GridPane nextBlock;
     @FXML private Button handleStartGame;
     @FXML private TextField userNameField;
     @FXML private Label currentPlayerField;
@@ -157,6 +158,22 @@ public class AppController implements Initializable {
 				GridPane.setFillHeight(pane, true);
 				GridPane.setFillWidth(pane, true);
 				gameGrid.add(pane, x, y);				
+			}
+		}
+		showNext();
+	}
+	
+	@FXML
+	public void showNext() {
+		nextBlock.getChildren().clear();
+		for (int y = 0; y < nextBlock.getRowCount(); y++) {
+			for (int x = 0; x < nextBlock.getColumnCount(); x++) {
+				String color = board.getTile(x, y);
+				StackPane nextPane = new StackPane();
+				nextPane.setStyle("-fx-background-color: " + color);
+				GridPane.setFillHeight(nextPane, true);
+				GridPane.setFillWidth(nextPane, true);
+				nextBlock.add(nextPane, x, y);				
 			}
 		}
 	}

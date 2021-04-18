@@ -13,6 +13,7 @@ public class Board {
 	
 	private int posX, posY, startPosX, startPosY;
 	private Shape currentShape;
+	private Shape nextShape;
 	
 	//hver block blir representert ved fargen sin som en string
 	private List<List<String>> board = new ArrayList<>();
@@ -22,7 +23,8 @@ public class Board {
 		startPosX = columnLength / 2;
 		posX = startPosX;
 		posY = startPosY;
-		
+		nextShape = NextShapeGenerator.getNextShape(getColumnLength());
+
 		while (board.size() < rowLength) {
 			List<String> list = new ArrayList<>();
 			while (list.size() < columnLength) {
@@ -92,10 +94,16 @@ public class Board {
 					deleteTrace ? null : currentShape.getColor()));
 	}
 	
+	
+	public Shape getNextShape() {
+		return nextShape;
+	}
+	
 	public void insertNewBlock() {
 		posX = startPosX;
 		posY = startPosY;
-		currentShape = NextShapeGenerator.getNextShape(getColumnLength());
+		currentShape = nextShape;
+		nextShape = NextShapeGenerator.getNextShape(getColumnLength());
 	}
 	
 	public int getPosX() {
