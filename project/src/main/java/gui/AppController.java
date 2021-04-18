@@ -125,48 +125,24 @@ public class AppController implements Initializable {
 		fifthPlace.setText(newScores.size() >= 5 ? newScores.get(4).getName()  + ": " + newScores.get(4).getScore() : "-");
         }
 	
-	@FXML
-	public void deleteLines() {
 		
-	}
-		
-	
-	private void moveRight() {
-		board.moveRight();
-	}
-	
-	
-	private void moveLeft() {
-		board.moveLeft();
-	}
-	
-	
-	private void hardDrop() {
-		board.hardDrop();
-	}
-	
-	
-	private void rotateShape() {
-		
-	}
-	
 	@FXML 
 	public void handleKeyPressed(KeyEvent e) {
 		System.out.println(e.getCode());
 		if (e.getCode().equals(KeyCode.A)) {
-			moveLeft();
+			board.moveLeft();
 			updateGrid();
 		}
 		if (e.getCode().equals(KeyCode.S)) {
-			hardDrop();
+			board.hardDrop();
 			updateGrid();
 		}
 		if (e.getCode().equals(KeyCode.D)) {
-			moveRight();
+			board.moveRight();
 			updateGrid();
 		}
 		if (e.getCode().equals(KeyCode.W)) {
-			rotateShape();
+			board.rotateShape();
 			updateGrid();
 		} else {
 			return;

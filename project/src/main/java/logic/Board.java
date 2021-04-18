@@ -183,4 +183,10 @@ public class Board {
 	public int getScore() {
 		return score;
 	}
+
+	public void rotateShape() {
+		updatePlacement(true);
+		currentShape.rotateRight();
+		updatePlacement(false);
+	}
 }

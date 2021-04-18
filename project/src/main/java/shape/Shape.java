@@ -44,10 +44,10 @@ public abstract class Shape {
 	 */
 	public void rotateLeft() {
 		switch (currentDirectionString) {
-			case "up": currentDirectionString = "left";
-			case "left": currentDirectionString = "down";
-			case "down": currentDirectionString = "right";
-			case "right": currentDirectionString = "up";
+			case "up": currentDirectionString = "left"; break;
+			case "left": currentDirectionString = "down"; break;
+			case "down": currentDirectionString = "right"; break;
+			case "right": currentDirectionString = "up"; break;
 		}
 		currentDirection = directions.get(currentDirectionString);
 	};
@@ -57,10 +57,10 @@ public abstract class Shape {
 	 */
 	public void rotateRight() {
 		switch (currentDirectionString) {
-			case "up": currentDirectionString = "right";
-			case "right": currentDirectionString = "down";
-			case "down": currentDirectionString = "left";
-			case "left": currentDirectionString = "up";	
+			case "up": currentDirectionString = "right"; break;
+			case "right": currentDirectionString = "down"; break;
+			case "down": currentDirectionString = "left"; break;
+			case "left": currentDirectionString = "up"; break;	
 		}
 		currentDirection = directions.get(currentDirectionString);
 	}
