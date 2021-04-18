@@ -10,9 +10,9 @@ public class IShape extends Shape {
 	public IShape(int columnLength) {
 		super(color,
 				new ArrayList<Integer>(Arrays.asList(-2, -1, 0, 1)),
-				new ArrayList<Integer>(Arrays.asList(0, -columnLength, -2*columnLength, -3*columnLength)),
+				new ArrayList<Integer>(Arrays.asList(0, columnLength, 2*columnLength, 3*columnLength)),
 				new ArrayList<Integer>(Arrays.asList(-1, 0, 1, 2)),
-				new ArrayList<Integer>(Arrays.asList(0, -columnLength, -2*columnLength, -3*columnLength))
+				new ArrayList<Integer>(Arrays.asList(0, columnLength, 2*columnLength, 3*columnLength))
 		);
 	}
 }

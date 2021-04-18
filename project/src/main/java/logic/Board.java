@@ -34,10 +34,14 @@ public class Board {
 			board.add(list);
 		}
 	}
-
+	
 	public void moveRight() {
-		boolean isSpaceAvailable = checkSpaceX(posX + 1);
-		if (isSpaceAvailable) posX++;
+		moveRight(1);
+	}
+
+	public void moveRight(int distance ) {
+		boolean isSpaceAvailable = checkSpaceX(posX + distance);
+		if (isSpaceAvailable) posX += distance;
 		else {
 			updatePlacement(false);
 		};
@@ -45,8 +49,12 @@ public class Board {
 	}
 	
 	public void moveLeft() {
-		boolean isSpaceAvailable = checkSpaceX(posX - 1);
-		if (isSpaceAvailable) posX--;
+		moveLeft(1);
+	}
+	
+	public void moveLeft(int distance) {
+		boolean isSpaceAvailable = checkSpaceX(posX - distance);
+		if (isSpaceAvailable) posX -= distance;
 		else {
 			updatePlacement(false);
 		};
@@ -54,15 +62,18 @@ public class Board {
 	}
 	
 	public void moveDown() {
+		moveDown(1);
+	}
+	
+	public void moveDown(int distance) {
+		score += distance;
 		
-		score++;
-		
-		boolean spaceBelow = checkSpaceY(posY  + 1);
+		boolean spaceBelow = checkSpaceY(posY + distance);
 		if (!spaceBelow) {
 			updatePlacement(false);
 			insertNewBlock();
 		} else {
-			posY++;
+			posY += distance;
 		}
 		updatePlacement(false);
 	}
@@ -114,7 +125,6 @@ public class Board {
 		} catch (IndexOutOfBoundsException | IllegalStateException e) {
 			return false;
 		}
-		
 		return true;
 	}
 	
@@ -186,7 +196,32 @@ public class Board {
 
 	public void rotateShape() {
 		updatePlacement(true);
-		currentShape.rotateRight();
-		updatePlacement(false);
+		try { 
+			currentShape.rotateRight();
+			updatePlacement(false);
+		} catch (IndexOutOfBoundsException e) {
+			if (checkSpaceX(posX + 1)) {
+				moveRight();
+				System.out.println("moveRight(1)");
+			} else if (checkSpaceX(posX + 2)) {
+				moveRight(2);
+				System.out.println("moveRight(2)");
+			} else if (checkSpaceX(posX - 1)) {
+				moveLeft();
+				System.out.println("moveLeft(1)");
+			} else if (checkSpaceX(posX - 2)) {
+				moveLeft(2);
+				System.out.println("moveLeft(2)");
+			} else if(checkSpaceY(posY + 1)) {
+				moveDown();
+				System.out.println("moveDown(1)");
+			} else if(checkSpaceY(posY + 2)) {
+				moveDown(2);
+				System.out.println("moveDown(2)");
+			} else {
+				currentShape.rotateLeft();
+				updatePlacement(false);
+			}
+		}
 	}
 }
