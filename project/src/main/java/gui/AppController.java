@@ -105,6 +105,7 @@ public class AppController implements Initializable {
 		board.insertNewBlock();
 		Timeline myTimeLine = new Timeline(new KeyFrame(Duration.seconds(0.5), ev -> {
         	board.moveDown();
+        	currentScore.setText("" + board.getScore());
         	updateGrid();
 	       }));
 		myTimeLine.setCycleCount(Animation.INDEFINITE);
