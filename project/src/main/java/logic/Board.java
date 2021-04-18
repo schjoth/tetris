@@ -15,7 +15,7 @@ public class Board {
 	private Shape currentShape;
 	private Shape nextShape;
 	private int score;
-	private boolean gameOver;
+	private boolean gameOver = false;
 	
 	//hver block blir representert ved fargen sin som en string
 	private List<List<String>> board = new ArrayList<>();
@@ -99,7 +99,9 @@ public class Board {
 			boolean spaceBelow = Coordinates.getCoorinatesForShape(currentShape, posX, y, getColumnLength()).stream()
 				.map(coo -> getTile(coo.getX(), coo.getY()) == null || coo.getY() == getColumnLength())
 				.reduce((a,b) -> a && b)
-				.get();
+				.get();     
+			System.out.println(spaceBelow);
+			Coordinates.getCoorinatesForShape(currentShape, posX, y, getColumnLength()).forEach(co -> System.out.println(co.getX() + "," + co.getY()));
 			if (spaceBelow == false) throw new IllegalStateException();
 		} catch (IndexOutOfBoundsException | IllegalStateException e) {
 			return false;
@@ -121,7 +123,7 @@ public class Board {
 			
 			Collection<Integer> xValues = allCoordinates.stream().map(Coordinates::getX).collect(Collectors.toList());
 			boolean presentInBothBorders = xValues.contains(0) && xValues.contains(getColumnLength() - 1);
-					
+			System.out.println(isSpaceAvailable +"+"+ presentInBothBorders );		
 			if (isSpaceAvailable == false || presentInBothBorders) throw new IllegalStateException();
 		} catch (IndexOutOfBoundsException | IllegalStateException e) {
 			return false;
@@ -146,10 +148,15 @@ public class Board {
 		checkForClearedLines();
 		posX = startPosX;
 		posY = startPosY;
+		System.out.println(posX);
+		System.out.println(posY);
 		currentShape = nextShape;
 		nextShape = NextShapeGenerator.getNextShape(getColumnLength());
 		
-		if (!checkSpaceX(posY) && !checkSpaceY(posX)) {
+		if (!Coordinates.getCoorinatesForShape(currentShape, posX, posY, getColumnLength()).stream()
+				.map(coo -> getTile(coo.getX(), coo.getY()) == null || coo.getY() == getColumnLength())
+				.reduce((a,b) -> a && b)
+				.get()) {
 			gameOver = true;
 		};
 	}
