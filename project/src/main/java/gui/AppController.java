@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -128,14 +129,22 @@ public class AppController implements Initializable {
 	@FXML 
 	public void handleKeyPressed(KeyEvent e) {
 		System.out.println(e.getCode());
-		switch (e.getCode()) {
-			case A: moveLeft();
-			case D: moveRight();
-			case S: hardDrop();
-			case W: rotateShape();
-		default:
-			break;
+		System.out.println(e.getCode().getClass());
+		if (e.getCode().equals(KeyCode.A)) {
+			moveLeft();
 		}
+		if (e.getCode().equals(KeyCode.S)) {
+			hardDrop();
+		}
+		if (e.getCode().equals(KeyCode.D)) {
+			moveRight();
+		}
+		if (e.getCode().equals(KeyCode.W)) {
+			rotateShape();
+		} else {
+			return;
+		}
+
 		updateGrid();
 	}
 	
