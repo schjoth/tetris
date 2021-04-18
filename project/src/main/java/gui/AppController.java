@@ -63,6 +63,7 @@ public class AppController implements Initializable {
 	@FXML private Pane ZLabel;
 	@FXML private Pane TLabel;
 	@FXML private Pane LLabel;
+	@FXML private Label gameOverText;
 	
 	
     
@@ -73,6 +74,7 @@ public class AppController implements Initializable {
     private int userScore;
     HandleHighScores highScoreHandler;
     private Shape shape;
+    private Timeline myTimeLine;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -100,16 +102,19 @@ public class AppController implements Initializable {
 		System.out.println("Start game!");
 		gameGrid.setStyle("-fx-background-color: rgba(80,80,80, 0.4)");
 		highScoreHandler.saveHighScores("src/main/resources/highscores.json");
-		gameRunning = true;
 		currentScore.setText(""+ userScore);
 		board.insertNewBlock();
 		gameGrid.requestFocus();
-		Timeline myTimeLine = new Timeline(new KeyFrame(Duration.seconds(0.5), ev -> {
+		myTimeLine = new Timeline(new KeyFrame(Duration.seconds(0.5), ev -> {
 			if (!board.gameOver()) {
 			board.moveDown();
         	currentScore.setText("" + board.getScore());
         	updateGrid();
-		}}));
+		} else {
+			gameOver();
+			System.out.println("KUK");
+		}
+			}));
 		myTimeLine.setCycleCount(Animation.INDEFINITE);
 	    myTimeLine.play();
 	}
@@ -193,11 +198,12 @@ public class AppController implements Initializable {
 	}
 	
 	public void gameOver() {
-		board.gameOver();
-		this.gameRunning = false;
+		myTimeLine.stop();
 		userScore = board.getScore();
-		highScoreHandler.updateScore(currentPlayerField.getText(), userScore, "src/main/resources/highscores.json");
-		handleStartGame.setDisable(false);
+		System.out.println("game over score: " + board.getScore());
+		System.out.println("game over score 2: " + currentScore.getText());
+		System.out.println("game over player: " + currentPlayerField.getText());
+//		highScoreHandler.updateScore(currentPlayerField.getText(), userScore, "src/main/resources/highscores.json");
 	}
 	
 }
