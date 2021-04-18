@@ -46,7 +46,6 @@ public class Board {
 		//TODO: valider
 		updatePlacement(true);
 		posX--;
-		
 		updatePlacement(false);
 	}
 	
@@ -70,11 +69,13 @@ public class Board {
 		int i = posY;
 		while (i < getRowLength()) {
 			i++;
-			boolean spaceBelow = Coordinates.getCoorinatesForShape(currentShape, posX, i, getColumnLength()).stream()
-				.map(coo -> getTile(coo.getX(), coo.getY()) == null)
-				.reduce((a,b) -> a && b)
-				.get();
-			if (spaceBelow == false) {
+			try {
+				boolean spaceBelow = Coordinates.getCoorinatesForShape(currentShape, posX, i, getColumnLength()).stream()
+					.map(coo -> getTile(coo.getX(), coo.getY()) == null)
+					.reduce((a,b) -> a && b)
+					.get();
+				if (spaceBelow == false) throw new IllegalStateException();
+			} catch (IndexOutOfBoundsException | IllegalStateException e) {
 				i--;
 				break;
 			}
