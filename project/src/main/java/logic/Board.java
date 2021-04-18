@@ -36,17 +36,20 @@ public class Board {
 	}
 
 	public void moveRight() {
-		//TODO: valider
-		updatePlacement(true);
-		posX++;
-		
+		boolean isSpaceAvailable = checkSpaceX(posX + 1);
+		if (isSpaceAvailable) posX++;
+		else {
+			updatePlacement(false);
+		};
 		updatePlacement(false);
 	}
 	
 	public void moveLeft() {
-		//TODO: valider
-		updatePlacement(true);
-		posX--;
+		boolean isSpaceAvailable = checkSpaceX(posX - 1);
+		if (isSpaceAvailable) posX--;
+		else {
+			updatePlacement(false);
+		};
 		updatePlacement(false);
 	}
 	
@@ -91,6 +94,29 @@ public class Board {
 		return true;
 	}
 	
+	private Boolean checkSpaceX(int x) {
+		try {
+			updatePlacement(true);
+			
+			Collection<Coordinates> allCoordinates = Coordinates.getCoorinatesForShape(currentShape, x, posY, getColumnLength());
+			
+			boolean isSpaceAvailable = allCoordinates.stream()
+				.map(coo -> 
+					getTile(coo.getX(), coo.getY()) == null)
+				.reduce((a,b) -> a && b)
+				.get();
+			
+			Collection<Integer> xValues = allCoordinates.stream().map(Coordinates::getX).collect(Collectors.toList());
+			boolean presentInBothBorders = xValues.contains(0) && xValues.contains(getColumnLength() - 1);
+					
+			if (isSpaceAvailable == false || presentInBothBorders) throw new IllegalStateException();
+		} catch (IndexOutOfBoundsException | IllegalStateException e) {
+			return false;
+		}
+		
+		return true;
+	}
+	
 	
 	private void updatePlacement(boolean deleteTrace) {
 		Coordinates.getCoorinatesForShape(currentShape, posX, posY, getColumnLength())
@@ -115,9 +141,7 @@ public class Board {
 	private void checkForClearedLines() {
 		for (int i = 0; i < getRowLength(); i++) {
 			List<String> row = board.get(i);
-			System.out.println(board.get(i));
 			if (row.stream().map(color -> color != null).reduce((b,c) -> b && c).get())  {
-				
 				board.remove(i);
 				
 				List<String> list = new ArrayList<>();
