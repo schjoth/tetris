@@ -1,6 +1,6 @@
 package logic;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +15,7 @@ public class Board {
 	private Shape currentShape;
 	private Shape nextShape;
 	private int score;
+	private boolean gameOver = false;
 	
 	//hver block blir representert ved fargen sin som en string
 	private List<List<String>> board = new ArrayList<>();
@@ -105,7 +106,7 @@ public class Board {
 			boolean spaceBelow = Coordinates.getCoorinatesForShape(currentShape, posX, y, getColumnLength()).stream()
 				.map(coo -> getTile(coo.getX(), coo.getY()) == null || coo.getY() == getColumnLength())
 				.reduce((a,b) -> a && b)
-				.get();
+				.get();     
 			if (spaceBelow == false) throw new IllegalStateException();
 		} catch (IndexOutOfBoundsException | IllegalStateException e) {
 			return false;
@@ -125,7 +126,6 @@ public class Board {
 			
 			Collection<Integer> xValues = allCoordinates.stream().map(Coordinates::getX).collect(Collectors.toList());
 			boolean presentInBothBorders = xValues.contains(0) && xValues.contains(getColumnLength() - 1);
-					
 			if (isSpaceAvailable == false || presentInBothBorders) throw new IllegalStateException();
 		} catch (IndexOutOfBoundsException | IllegalStateException e) {
 			return false;
@@ -156,6 +156,13 @@ public class Board {
 		posY = startPosY;
 		currentShape = nextShape;
 		nextShape = NextShapeGenerator.getNextShape(getColumnLength());
+		
+		if (!Coordinates.getCoorinatesForShape(currentShape, posX, posY, getColumnLength()).stream()
+				.map(coo -> getTile(coo.getX(), coo.getY()) == null || coo.getY() == getColumnLength())
+				.reduce((a,b) -> a && b)
+				.get()) {
+			gameOver = true;
+		};
 	}
 	
 	private void checkForClearedLines() {
@@ -175,6 +182,10 @@ public class Board {
 				score += numberOfClearedLines * 100;
 			}
 		}
+	}
+	
+	public boolean gameOver() {
+		return gameOver;
 	}
 	
 	public int getPosX() {
