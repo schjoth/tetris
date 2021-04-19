@@ -1,6 +1,7 @@
 package logic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -16,6 +17,8 @@ public class HandleHighScores  {
 	
 	public List<Score> updateScore(String name, int contenderScore, String path) {
 		Score score = new Score(name, contenderScore);
+		getHighScoresFromFile(path);
+		highscores = getHighScores();
 		highscores.add(score);
 		Collections.sort(highscores);
 		if (highscores.size() > 5) {

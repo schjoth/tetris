@@ -199,11 +199,11 @@ public class AppController implements Initializable {
 	
 	public void gameOver() {
 		myTimeLine.stop();
-		userScore = board.getScore();
+		userScore = board.getScore();		
 		System.out.println("game over score: " + board.getScore());
 		System.out.println("game over score 2: " + currentScore.getText());
 		System.out.println("game over player: " + currentPlayerField.getText());
-//		highScoreHandler.updateScore(currentPlayerField.getText(), userScore, "src/main/resources/highscores.json");
+		highScoreHandler.updateScore(userName, userScore, "src/main/resources/highscores.json");
 	}
 	
 }
