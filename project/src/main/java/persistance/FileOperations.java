@@ -22,7 +22,7 @@ public class FileOperations {
 		    ObjectMapper mapper = new ObjectMapper();
 
 		    // convert JSON file to map
-		    highscores = Arrays.asList(mapper.readValue(Paths.get(path).toFile(), Score[].class));
+		    highscores = new ArrayList<>(Arrays.asList(mapper.readValue(Paths.get(path).toFile(), Score[].class)));
 
 		    // print map entriess
 	    	System.out.println("Top 5 scores: ");

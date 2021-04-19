@@ -63,7 +63,7 @@ public class AppController implements Initializable {
 	@FXML private Pane ZLabel;
 	@FXML private Pane TLabel;
 	@FXML private Pane LLabel;
-	@FXML private Label gameOverText;
+	@FXML private Pane gameOverPane;
 	
 	
     
@@ -98,6 +98,7 @@ public class AppController implements Initializable {
     
 	@FXML
 	public void handleStartGame() {
+		gameOverPane.setVisible(false);
 		board = new Board(10, 20);
 		System.out.println("Start game!");
 		gameGrid.setStyle("-fx-background-color: rgba(80,80,80, 0.4)");
@@ -199,11 +200,12 @@ public class AppController implements Initializable {
 	
 	public void gameOver() {
 		myTimeLine.stop();
+		gameOverPane.setStyle("-fx-background-color: rgba(80,80,80, 0.4)");
+		gameOverPane.setVisible(true);
 		userScore = board.getScore();
-		System.out.println("game over score: " + board.getScore());
-		System.out.println("game over score 2: " + currentScore.getText());
-		System.out.println("game over player: " + currentPlayerField.getText());
-//		highScoreHandler.updateScore(currentPlayerField.getText(), userScore, "src/main/resources/highscores.json");
+		System.out.println("User: " + userName);
+		System.out.println("Score: " + userScore);
+		highScoreHandler.updateScore(userName, userScore, "src/main/resources/highscores.json");
 	}
 	
 }
