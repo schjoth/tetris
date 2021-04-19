@@ -126,7 +126,7 @@ public class Board {
 			
 			Collection<Integer> xValues = allCoordinates.stream().map(Coordinates::getX).collect(Collectors.toList());
 			boolean presentInBothBorders = xValues.contains(0) && xValues.contains(getColumnLength() - 1);
-			if (isSpaceAvailable == false || presentInBothBorders) throw new IllegalStateException();
+			if (isSpaceAvailable == false || presentInBothBorders || x == -1 || x == getColumnLength()) throw new IllegalStateException();
 		} catch (IndexOutOfBoundsException | IllegalStateException e) {
 			return false;
 		}
@@ -211,7 +211,6 @@ public class Board {
 	public List<List<String>> getBoard() {
 		return board;
 	}
-	
 	public int getScore() {
 		return score;
 	}
@@ -220,26 +219,23 @@ public class Board {
 		updatePlacement(true);
 		try { 
 			currentShape.rotateRight();
+			if(!checkSpaceX(posX)) {
+				throw new IllegalStateException();
+			};
 			updatePlacement(false);
-		} catch (IndexOutOfBoundsException e) {
+		} catch (IndexOutOfBoundsException | IllegalStateException e) {
 			if (checkSpaceX(posX + 1)) {
 				moveRight();
-				System.out.println("moveRight(1)");
-			} else if (checkSpaceX(posX + 2)) {
-				moveRight(2);
-				System.out.println("moveRight(2)");
 			} else if (checkSpaceX(posX - 1)) {
 				moveLeft();
-				System.out.println("moveLeft(1)");
-			} else if (checkSpaceX(posX - 2)) {
-				moveLeft(2);
-				System.out.println("moveLeft(2)");
 			} else if(checkSpaceY(posY + 1)) {
 				moveDown();
-				System.out.println("moveDown(1)");
+			} else if (checkSpaceX(posX + 2)) {
+				moveRight(2);
+			} else if (checkSpaceX(posX - 2)) {
+				moveLeft(2);
 			} else if(checkSpaceY(posY + 2)) {
 				moveDown(2);
-				System.out.println("moveDown(2)");
 			} else {
 				currentShape.rotateLeft();
 				updatePlacement(false);
