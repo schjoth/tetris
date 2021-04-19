@@ -16,7 +16,7 @@ public class FileOperations {
 	
 	
 	public static List<Score> readFromFile(String path) {
-		List<Score> highscores = new ArrayList<Score>();
+		List<Score> highscores;
 		try {
 		    // create object mapper instance
 		    ObjectMapper mapper = new ObjectMapper();

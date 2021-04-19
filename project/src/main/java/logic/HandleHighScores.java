@@ -17,8 +17,6 @@ public class HandleHighScores  {
 	
 	public List<Score> updateScore(String name, int contenderScore, String path) {
 		Score score = new Score(name, contenderScore);
-		getHighScoresFromFile(path);
-		highscores = getHighScores();
 		highscores.add(score);
 		Collections.sort(highscores);
 		if (highscores.size() > 5) {
