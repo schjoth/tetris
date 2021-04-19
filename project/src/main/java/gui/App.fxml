@@ -144,6 +144,15 @@
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffd500" height="17.0" layoutX="48.0" layoutY="39.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
                </children>
             </Pane>
+            <Pane fx:id="gameOverPane" disable="true" layoutX="138.0" layoutY="31.0" prefHeight="471.0" prefWidth="230.0">
+               <children>
+                  <Label layoutX="23.0" layoutY="113.0" prefHeight="70.0" prefWidth="184.0" text="GAME OVER" textFill="RED">
+                     <font>
+                        <Font size="33.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
          </children>
          <opaqueInsets>
             <Insets />
