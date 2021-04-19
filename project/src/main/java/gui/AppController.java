@@ -113,7 +113,7 @@ public class AppController implements Initializable {
         	updateGrid();
 		} else {
 			gameOver();
-			System.out.println("KUK");
+			System.out.println("Game over!");
 		}
 			}));
 		myTimeLine.setCycleCount(Animation.INDEFINITE);
