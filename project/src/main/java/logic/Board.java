@@ -132,6 +132,7 @@ public class Board {
 			
 			Collection<Integer> xValues = allCoordinates.stream().map(Coordinates::getX).collect(Collectors.toList());
 			boolean presentInBothBorders = xValues.contains(0) && xValues.contains(getColumnLength() - 1);
+			
 			if (isSpaceAvailable == false || presentInBothBorders || x == -1 || x == getColumnLength()) throw new IllegalStateException();
 		} catch (IndexOutOfBoundsException | IllegalStateException e) {
 			return false;
@@ -231,17 +232,17 @@ public class Board {
 				updatePlacement(false);
 			}
 		} catch (IndexOutOfBoundsException | IllegalStateException e) {
-			if (checkSpaceX(posX + 1)) {
+			if (checkSpaceX(posX + 1) && posX < getColumnLength() - 1) {
 				moveRight(1, true);
-			} else if (checkSpaceX(posX - 1)) {
+			} else if (checkSpaceX(posX - 1) && posX >= 1) {
 				moveLeft(1, true);
-			} else if(checkSpaceY(posY + 1)) {
+			} else if(checkSpaceY(posY + 1) && checkSpaceX(posX)) {
 				moveDown(1, true);
-			} else if (checkSpaceX(posX + 2)) {
+			} else if (checkSpaceX(posX + 2) && posX < getColumnLength() - 2) {
 				moveRight(2, true);
-			} else if (checkSpaceX(posX - 2)) {
+			} else if (checkSpaceX(posX - 2) && posX >= 2) {
 				moveLeft(2, true);
-			} else if(checkSpaceY(posY + 2)) {
+			} else if(checkSpaceY(posY + 2) && checkSpaceX(posX)) {
 				moveDown(2, true);
 			} else {
 				currentShape.rotateLeft();
