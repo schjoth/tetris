@@ -9,6 +9,7 @@ import persistance.FileOperations;
 
 public class HandleHighScores  {
 	
+	private FileOperations fileOperator = new FileOperations();
 	private List<Score> highscores = new ArrayList<>();
 	
 	public HandleHighScores() {
@@ -32,7 +33,7 @@ public class HandleHighScores  {
 	
 	public void saveHighScores(String path) {
 		try {
-			FileOperations.writeToFile(highscores, path);
+			fileOperator.writeToFile(highscores, path);
 			System.out.println("Successfully saved!");
 		} catch (JsonMappingException e) {
 			e.printStackTrace();
@@ -40,6 +41,6 @@ public class HandleHighScores  {
 	}
 	
 	public void getHighScoresFromFile(String path) {
-		highscores = FileOperations.readFromFile(path);
+		highscores = fileOperator.readFromFile(path);
 	}	
 }

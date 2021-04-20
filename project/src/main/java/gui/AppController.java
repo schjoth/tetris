@@ -82,23 +82,27 @@ public class AppController implements Initializable {
 		userPage.setVisible(true);
 		gamePage.setDisable(true);
 		gamePage.setVisible(false);
+		gameOverPane.setVisible(false);
     }
     
 	@FXML
 	public void userNameSubmit() {
+		if (userNameField.getText() == "") {
+			userNameField.setPromptText("Please enter a name");
+		} else {
 		this.userName = userNameField.getText();
 		userPage.setDisable(true);
 		userPage.setVisible(false);
 		gamePage.setDisable(false);
 		gamePage.setVisible(true);
-		currentPlayerField.setText("CURRENT PLAYER: " + userName);
+		currentPlayerField.setText("CURRENT PLAYER: \n" + userName);
 		highScoreHandler = new HandleHighScores();
 		updateScores();
+		}
 	}
     
 	@FXML
 	public void handleStartGame() {
-		gameOverPane.setVisible(false);
 		board = new Board(10, 20);
 		System.out.println("Start game!");
 		gameGrid.setStyle("-fx-background-color: rgba(80,80,80, 0.4)");
@@ -135,30 +139,32 @@ public class AppController implements Initializable {
 		
 	@FXML 
 	public void handleKeyPressed(KeyEvent e) {
-		if (e.getCode().equals(KeyCode.A)) {
-			board.moveLeft();
-			updateGrid();
-		}
-		if (e.getCode().equals(KeyCode.S)) {
-			board.moveDown();
-			updateGrid();
-		}
-		if (e.getCode().equals(KeyCode.D)) {
-			board.moveRight();
-			updateGrid();
-		}
-		if (e.getCode().equals(KeyCode.W)) {
-			board.rotateShape();
-			updateGrid();
-		}
-		if (e.getCode().equals(KeyCode.SPACE)) {
-			board.hardDrop();
-			updateGrid();
-		}
-		else {
-			return;
-		}
+		if (!board.gameOver()) {
+			if (e.getCode().equals(KeyCode.A)) {
+				board.moveLeft();
+				updateGrid();
+			}
+			if (e.getCode().equals(KeyCode.S)) {
+				board.moveDown();
+				updateGrid();
+			}
+			if (e.getCode().equals(KeyCode.D)) {
+				board.moveRight();
+				updateGrid();
+			}
+			if (e.getCode().equals(KeyCode.W)) {
+				board.rotateShape();
+				updateGrid();
+			}
+			if (e.getCode().equals(KeyCode.SPACE)) {
+				board.hardDrop();
+				updateGrid();
+			}
+			else {
+				return;
+			}
 		updateGrid();
+		}
 	}
 	
 	public void updateGrid() {
@@ -187,20 +193,21 @@ public class AppController implements Initializable {
 		
 		
 		switch(board.getNextShape().color) {
-		case JShape.color: JLabel.setVisible(true);  break;
-		case IShape.color: ILabel.setVisible(true); break;
-		case SShape.color: SLabel.setVisible(true);  break;
-		case SquareShape.color: SquareLabel.setVisible(true);  break;
-		case TShape.color: TLabel.setVisible(true); break;
-		case ZShape.color: ZLabel.setVisible(true); break;
-		case LShape.color: LLabel.setVisible(true);  break;
+		
+			case JShape.color: JLabel.setVisible(true);  break;
+			case IShape.color: ILabel.setVisible(true); break;
+			case SShape.color: SLabel.setVisible(true);  break;
+			case SquareShape.color: SquareLabel.setVisible(true);  break;
+			case TShape.color: TLabel.setVisible(true); break;
+			case ZShape.color: ZLabel.setVisible(true); break;
+			case LShape.color: LLabel.setVisible(true);  break;
 		}
 		
 	}
 	
 	public void gameOver() {
 		myTimeLine.stop();
-		gameOverPane.setStyle("-fx-background-color: rgba(80,80,80, 0.4)");
+		gameOverPane.setStyle("-fx-background-color: rgba(80,80,80, 0.5)");
 		gameOverPane.setVisible(true);
 		userScore = board.getScore();
 		System.out.println("User: " + userName);
