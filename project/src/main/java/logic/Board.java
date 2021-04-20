@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import coordinates.Coordinates;
-import coordinates.CoordinatesCalculator;
 import shape.Shape;
 
 public class Board {
@@ -37,11 +36,13 @@ public class Board {
 	}
 	
 	public void moveRight() {
-		moveRight(1);
+		moveRight(1, false);
 	}
 
-	public void moveRight(int distance ) {
-		updatePlacement(true);
+	private void moveRight(int distance, boolean isOverlapping ) {
+		if (!isOverlapping) {
+			updatePlacement(true);
+		}
 		
 		boolean isSpaceAvailable = checkSpaceX(posX + distance);
 		if (isSpaceAvailable) posX += distance;
@@ -52,11 +53,13 @@ public class Board {
 	}
 	
 	public void moveLeft() {
-		moveLeft(1);
+		moveLeft(1, false);
 	}
 	
-	public void moveLeft(int distance) {
-		updatePlacement(true);
+	private void moveLeft(int distance, boolean isOverlapping) {
+		if (!isOverlapping) {
+			updatePlacement(true);
+		}
 		
 		boolean isSpaceAvailable = checkSpaceX(posX - distance);
 		if (isSpaceAvailable) posX -= distance;
@@ -67,13 +70,16 @@ public class Board {
 	}
 	
 	public void moveDown() {
-		moveDown(1);
+		moveDown(1, false);
 	}
 	
-	public void moveDown(int distance) {
+	private void moveDown(int distance, boolean isOverlapping) {
 		score += distance;
 		
-		updatePlacement(true);
+		if (!isOverlapping) {
+			updatePlacement(true);
+		}
+		
 		boolean spaceBelow = checkSpaceY(posY + distance);
 		if (!spaceBelow) {
 			updatePlacement(false);
@@ -126,6 +132,7 @@ public class Board {
 			
 			Collection<Integer> xValues = allCoordinates.stream().map(Coordinates::getX).collect(Collectors.toList());
 			boolean presentInBothBorders = xValues.contains(0) && xValues.contains(getColumnLength() - 1);
+			
 			if (isSpaceAvailable == false || presentInBothBorders || x == -1 || x == getColumnLength()) throw new IllegalStateException();
 		} catch (IndexOutOfBoundsException | IllegalStateException e) {
 			return false;
@@ -219,23 +226,24 @@ public class Board {
 		updatePlacement(true);
 		try { 
 			currentShape.rotateRight();
-			if(!checkSpaceX(posX)) {
+			if(!checkSpaceX(posX) || !checkSpaceY(posY)) {
 				throw new IllegalStateException();
-			};
-			updatePlacement(false);
+			} else {
+				updatePlacement(false);
+			}
 		} catch (IndexOutOfBoundsException | IllegalStateException e) {
-			if (checkSpaceX(posX + 1)) {
-				moveRight();
-			} else if (checkSpaceX(posX - 1)) {
-				moveLeft();
-			} else if(checkSpaceY(posY + 1)) {
-				moveDown();
-			} else if (checkSpaceX(posX + 2)) {
-				moveRight(2);
-			} else if (checkSpaceX(posX - 2)) {
-				moveLeft(2);
-			} else if(checkSpaceY(posY + 2)) {
-				moveDown(2);
+			if (checkSpaceX(posX + 1) && posX < getColumnLength() - 1) {
+				moveRight(1, true);
+			} else if (checkSpaceX(posX - 1) && posX >= 1) {
+				moveLeft(1, true);
+			} else if(checkSpaceY(posY + 1) && checkSpaceX(posX)) {
+				moveDown(1, true);
+			} else if (checkSpaceX(posX + 2) && posX < getColumnLength() - 2) {
+				moveRight(2, true);
+			} else if (checkSpaceX(posX - 2) && posX >= 2) {
+				moveLeft(2, true);
+			} else if(checkSpaceY(posY + 2) && checkSpaceX(posX)) {
+				moveDown(2, true);
 			} else {
 				currentShape.rotateLeft();
 				updatePlacement(false);
