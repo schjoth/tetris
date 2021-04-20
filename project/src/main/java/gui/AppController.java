@@ -94,6 +94,7 @@ public class AppController implements Initializable {
 		highScoreHandler.saveHighScores("src/main/resources/highscores.json");
 		currentScore.setText(""+ userScore);
 		gameOverPane.setVisible(false);
+		handleStartGame.setDisable(true);
 		board.insertNewBlock();
 		gameGrid.requestFocus();
 		myTimeLine = new Timeline(new KeyFrame(Duration.seconds(0.5), ev -> {
@@ -124,6 +125,9 @@ public class AppController implements Initializable {
 		
 	@FXML 
 	public void handleKeyPressed(KeyEvent e) {
+		if (this.board == null) {
+			return;
+		}
 		if (!board.isGameOver()) {
 			switch(e.getCode()) {
 			case A, LEFT:
@@ -199,6 +203,7 @@ public class AppController implements Initializable {
 		myTimeLine.stop();
 		gameOverPane.setStyle("-fx-background-color: rgba(80,80,80, 0.5)");
 		gameOverPane.setVisible(true);
+		handleStartGame.setDisable(false);
 		userScore = board.getScore();
 		highScoreHandler.updateScore(userName, userScore, "src/main/resources/highscores.json");
 		updateScores();
