@@ -20,6 +20,10 @@ public class Board {
 	private List<List<String>> board = new ArrayList<>();
 	
 	public Board(int columnLength, int rowLength) {
+		if (columnLength < 1 || rowLength < 1) {
+			throw new IllegalArgumentException("columnLength and rowLength should be larger than 0");
+		}
+		
 		startPosY = 0;
 		startPosX = columnLength / 2;
 		posX = startPosX;
@@ -35,38 +39,26 @@ public class Board {
 		}
 	}
 	
-	public void moveRight() {
-		moveRight(1, false);
+	public boolean moveRight() {
+		return moveX(1, false);
 	}
 
-	private void moveRight(int distance, boolean isOverlapping ) {
+	public boolean moveLeft() {
+		return moveX(-1, false);
+	}
+	
+	private boolean moveX(int distance, boolean isOverlapping) {
 		if (!isOverlapping) {
 			updatePlacement(true);
 		}
 		
 		boolean isSpaceAvailable = checkSpaceX(posX + distance);
-		if (isSpaceAvailable) posX += distance;
-		else {
-			updatePlacement(false);
-		};
-		updatePlacement(false);
-	}
-	
-	public void moveLeft() {
-		moveLeft(1, false);
-	}
-	
-	private void moveLeft(int distance, boolean isOverlapping) {
-		if (!isOverlapping) {
-			updatePlacement(true);
+		if (isSpaceAvailable) {
+			posX += distance;
 		}
 		
-		boolean isSpaceAvailable = checkSpaceX(posX - distance);
-		if (isSpaceAvailable) posX -= distance;
-		else {
-			updatePlacement(false);
-		};
 		updatePlacement(false);
+		return isSpaceAvailable;
 	}
 	
 	public void moveDown() {
@@ -80,8 +72,7 @@ public class Board {
 			updatePlacement(true);
 		}
 		
-		boolean spaceBelow = checkSpaceY(posY + distance);
-		if (!spaceBelow) {
+		if (!checkSpaceY(posY + distance)) {
 			updatePlacement(false);
 			insertNewBlock();
 		} else {
@@ -133,7 +124,7 @@ public class Board {
 			Collection<Integer> xValues = allCoordinates.stream().map(Coordinates::getX).collect(Collectors.toList());
 			boolean presentInBothBorders = xValues.contains(0) && xValues.contains(getColumnLength() - 1);
 			
-			if (isSpaceAvailable == false || presentInBothBorders || x == -1 || x == getColumnLength()) throw new IllegalStateException();
+			if (isSpaceAvailable == false || presentInBothBorders || x <= -1 || x >= getColumnLength()) throw new IllegalStateException();
 		} catch (IndexOutOfBoundsException | IllegalStateException e) {
 			return false;
 		}
@@ -147,7 +138,6 @@ public class Board {
 				.set(coo.getX(),
 					deleteTrace ? null : currentShape.color));
 	}
-	
 	
 	public Shape getNextShape() {
 		return nextShape;
@@ -187,7 +177,7 @@ public class Board {
 		}
 	}
 	
-	public boolean gameOver() {
+	public boolean isGameOver() {
 		return gameOver;
 	}
 	
@@ -218,7 +208,7 @@ public class Board {
 		return score;
 	}
 
-	public void rotateShape() {
+	public boolean rotateShape() {
 		updatePlacement(true);
 		try { 
 			currentShape.rotateRight();
@@ -229,21 +219,23 @@ public class Board {
 			}
 		} catch (IndexOutOfBoundsException | IllegalStateException e) {
 			if (checkSpaceX(posX + 1) && posX < getColumnLength() - 1) {
-				moveRight(1, true);
+				moveX(1, true);
 			} else if (checkSpaceX(posX - 1) && posX >= 1) {
-				moveLeft(1, true);
+				moveX(-1, true);
 			} else if(checkSpaceY(posY + 1) && checkSpaceX(posX)) {
 				moveDown(1, true);
 			} else if (checkSpaceX(posX + 2) && posX < getColumnLength() - 2) {
-				moveRight(2, true);
+				moveX(2, true);
 			} else if (checkSpaceX(posX - 2) && posX >= 2) {
-				moveLeft(2, true);
+				moveX(-2, true);
 			} else if(checkSpaceY(posY + 2) && checkSpaceX(posX)) {
 				moveDown(2, true);
 			} else {
 				currentShape.rotateLeft();
 				updatePlacement(false);
+				return false;
 			}
 		}
+		return true;
 	}
 }

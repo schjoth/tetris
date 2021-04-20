@@ -98,7 +98,7 @@ public class AppController implements Initializable {
 		board.insertNewBlock();
 		gameGrid.requestFocus();
 		myTimeLine = new Timeline(new KeyFrame(Duration.seconds(0.5), ev -> {
-			if (!board.gameOver()) {
+			if (!board.isGameOver()) {
 			board.moveDown();
         	currentScore.setText("" + board.getScore());
         	updateGrid();
@@ -126,7 +126,7 @@ public class AppController implements Initializable {
 		
 	@FXML 
 	public void handleKeyPressed(KeyEvent e) {
-		if (!board.gameOver()) {
+		if (!board.isGameOver()) {
 			switch(e.getCode()) {
 			case A, LEFT:
 				board.moveLeft();
