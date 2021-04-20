@@ -1,6 +1,10 @@
 package coordinatesTests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.util.Collection;
+
 import org.junit.jupiter.api.Test;
 import coordinates.*;
 import shape.Shape;
@@ -19,8 +23,10 @@ public class CoordinatesTest {
 	public void getCoordinatesForShapeTest() {
 		Shape square = new SquareShape(20);
 		
-		Coordinates.getCoorinatesForShape(square, 4, 8, 20);
-		System.out.println(Coordinates.getCoorinatesForShape(square, 4, 8, 20));
+		Collection<Coordinates> coordinates = Coordinates.getCoorinatesForShape(square, 4, 8, 20);
+		
+		assertNotNull(coordinates);
+		
 		// TODO: denne.
 		
 	}

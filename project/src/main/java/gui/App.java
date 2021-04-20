@@ -13,7 +13,7 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = (Parent) fxmlLoader.load(this.getClass().getResourceAsStream("App.fxml"));
         primaryStage.setTitle("Tetris");
-        Scene scene = new Scene(root, 700, 600);
+        Scene scene = new Scene(root, 621, 530);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

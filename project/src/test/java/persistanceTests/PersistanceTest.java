@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import logic.HandleHighScores;
 import logic.Score;
 
-public class persistanceTest {
+public class PersistanceTest {
 
 	@Test
 	public void writeToFile() {
