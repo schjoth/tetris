@@ -201,6 +201,7 @@ public class AppController implements Initializable {
 		gameOverPane.setVisible(true);
 		userScore = board.getScore();
 		highScoreHandler.updateScore(userName, userScore, "src/main/resources/highscores.json");
+		updateScores();
 	}
 	
 }
