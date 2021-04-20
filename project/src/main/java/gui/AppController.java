@@ -1,27 +1,16 @@
 package gui;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
+import java.net.URL; 
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import coordinates.Coordinates;
-import coordinates.CoordinatesCalculator;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -35,7 +24,6 @@ import shape.IShape;
 import shape.JShape;
 import shape.LShape;
 import shape.SShape;
-import shape.Shape;
 import shape.SquareShape;
 import shape.TShape;
 import shape.ZShape;
@@ -69,11 +57,9 @@ public class AppController implements Initializable {
     
 //    private Coordinates currentPos;
 	private Board board;
-    private Boolean gameRunning;
     private String userName;
     private int userScore;
     HandleHighScores highScoreHandler;
-    private Shape shape;
     private Timeline myTimeLine;
     
     @Override
@@ -95,7 +81,7 @@ public class AppController implements Initializable {
 		userPage.setVisible(false);
 		gamePage.setDisable(false);
 		gamePage.setVisible(true);
-		currentPlayerField.setText("CURRENT PLAYER: \n" + userName);
+		currentPlayerField.setText("CURRENT PLAYER:   " + userName);
 		highScoreHandler = new HandleHighScores();
 		updateScores();
 		}
@@ -108,6 +94,7 @@ public class AppController implements Initializable {
 		gameGrid.setStyle("-fx-background-color: rgba(80,80,80, 0.4)");
 		highScoreHandler.saveHighScores("src/main/resources/highscores.json");
 		currentScore.setText(""+ userScore);
+		gameOverPane.setVisible(false);
 		board.insertNewBlock();
 		gameGrid.requestFocus();
 		myTimeLine = new Timeline(new KeyFrame(Duration.seconds(0.5), ev -> {
@@ -140,28 +127,33 @@ public class AppController implements Initializable {
 	@FXML 
 	public void handleKeyPressed(KeyEvent e) {
 		if (!board.gameOver()) {
-			if (e.getCode().equals(KeyCode.A)) {
+			switch(e.getCode()) {
+			case A, LEFT:
 				board.moveLeft();
 				updateGrid();
-			}
-			if (e.getCode().equals(KeyCode.S)) {
-				board.moveDown();
-				updateGrid();
-			}
-			if (e.getCode().equals(KeyCode.D)) {
+				break;
+				
+			case D, RIGHT:
 				board.moveRight();
 				updateGrid();
-			}
-			if (e.getCode().equals(KeyCode.W)) {
+				break;
+
+			case W, UP:
 				board.rotateShape();
 				updateGrid();
-			}
-			if (e.getCode().equals(KeyCode.SPACE)) {
+				break;
+
+			case S, DOWN:
+				board.moveDown();
+				updateGrid();
+				break;
+
+			case SPACE:
 				board.hardDrop();
 				updateGrid();
-			}
-			else {
-				return;
+				break;
+			default:
+				break;
 			}
 		updateGrid();
 		}

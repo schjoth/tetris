@@ -1,32 +1,28 @@
 package coordinatesTests;
 
-import static org.junit.jupiter.api.Assertions.assertEquals; 
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
-
 import coordinates.*;
+import shape.Shape;
+import shape.SquareShape;
 
 public class CoordinatesTest {
+
+	@Test
+	public void CoordinateTest() {
+		Coordinates coordinate = new Coordinates(5,8);
+		assertEquals(5, coordinate.getX());
+		assertEquals(8, coordinate.getY());
+	}
 	
 	@Test
-	public void testCalculateCoordinates() {
-		int index = 1;
-		int columnLength = 8;
-		Coordinates coo1 = CoordinatesCalculator.calcuateCoordinates(index, columnLength);
-		assertEquals(0, coo1.getY());
-		assertEquals(1, coo1.getX());
+	public void getCoordinatesForShapeTest() {
+		Shape square = new SquareShape(20);
 		
-		int index2 = 46;
-		Coordinates coo2 = CoordinatesCalculator.calcuateCoordinates(index2, columnLength);
-		assertEquals(5, coo2.getY());
-		assertEquals(6, coo2.getX());
+		Coordinates.getCoorinatesForShape(square, 4, 8, 20);
+		System.out.println(Coordinates.getCoorinatesForShape(square, 4, 8, 20));
+		// TODO: denne.
+		
 	}
 	
-	@Test
-	public void testCalculateIndex() {
-		int x = 3;
-		int y = 5;
-		int columnLength = 10;
-		assertEquals(53, CoordinatesCalculator.calculateIndex(x, y, columnLength));
-	}
 }

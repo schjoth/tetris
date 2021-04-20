@@ -1,9 +1,8 @@
 package logic;
 
-import java.util.Collection;
+import java.util.Collection; 
 import java.util.stream.Collectors;
 import coordinates.Coordinates;
-import coordinates.CoordinatesCalculator;
 import shape.Shape;
 
 public class HandleShapeRotate {
