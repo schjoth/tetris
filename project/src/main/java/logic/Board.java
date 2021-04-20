@@ -142,14 +142,10 @@ public class Board {
 	
 	
 	private void updatePlacement(boolean deleteTrace) {
-		try {
 		Coordinates.getCoorinatesForShape(currentShape, posX, posY, getColumnLength())
 			.forEach(coo -> board.get(coo.getY())
 				.set(coo.getX(),
 					deleteTrace ? null : currentShape.color));
-		} catch (IndexOutOfBoundsException e) {
-			
-		}
 	}
 	
 	
