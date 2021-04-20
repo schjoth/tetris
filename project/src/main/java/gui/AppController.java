@@ -157,7 +157,6 @@ public class AppController implements Initializable {
 			default:
 				break;
 			}
-		updateGrid();
 		}
 	}
 	
