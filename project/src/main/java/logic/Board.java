@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import coordinates.Coordinates;
-import coordinates.CoordinatesCalculator;
 import shape.Shape;
 
 public class Board {
@@ -219,7 +218,7 @@ public class Board {
 		updatePlacement(true);
 		try { 
 			currentShape.rotateRight();
-			if(!checkSpaceX(posX)) {
+			if(!checkSpaceX(posX) || !checkSpaceY(posY)) {
 				throw new IllegalStateException();
 			};
 			updatePlacement(false);
