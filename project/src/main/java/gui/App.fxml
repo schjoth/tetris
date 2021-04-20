@@ -80,14 +80,14 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <Label fx:id="currentScore" layoutX="66.0" layoutY="84.0" text="0">
+            <Label fx:id="currentScore" layoutX="51.0" layoutY="85.0" text="0">
                <font>
                   <Font size="35.0" />
                </font>
             </Label>
             <Label layoutX="37.0" layoutY="229.0" text="NEXT BLOCK:" />
             <TextArea disable="true" layoutX="25.0" layoutY="271.0" prefHeight="77.0" prefWidth="103.0" />
-            <Label fx:id="currentPlayerField" layoutX="463.0" layoutY="105.0" text="Label" />
+            <Label fx:id="currentPlayerField" layoutX="435.0" layoutY="106.0" text="Label" />
             <Pane fx:id="ILabel" disable="true" layoutX="24.0" layoutY="271.0" prefHeight="77.0" prefWidth="103.0" visible="false">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="AQUA" height="17.0" layoutX="39.0" layoutY="31.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />

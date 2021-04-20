@@ -10,12 +10,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import logic.Score;
 
-public class FileOperations {
+public class FileOperations implements FileOperationInterface {
 
 	public static FileWriter file;
 	
 	
-	public static List<Score> readFromFile(String path) {
+	public List<Score> readFromFile(String path) {
 		List<Score> highscores = null;
 		try {
 		    // create object mapper instance
@@ -36,13 +36,12 @@ public class FileOperations {
 		return highscores;
 	}
 	
-	public static void writeToFile(List<Score> highscores, String path) throws JsonMappingException {
+	public void writeToFile(List<Score> highscores, String path) throws JsonMappingException {
 		// create object mapper instance
 	    ObjectMapper mapper = new ObjectMapper();
 	    try {
 			mapper.writeValue(Paths.get(path).toFile(), highscores);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
