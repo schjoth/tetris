@@ -90,7 +90,6 @@ public class AppController implements Initializable {
 	@FXML
 	public void handleStartGame() {
 		board = new Board(10, 20);
-		System.out.println("Start game!");
 		gameGrid.setStyle("-fx-background-color: rgba(80,80,80, 0.4)");
 		highScoreHandler.saveHighScores("src/main/resources/highscores.json");
 		currentScore.setText(""+ userScore);
@@ -104,7 +103,6 @@ public class AppController implements Initializable {
         	updateGrid();
 		} else {
 			gameOver();
-			System.out.println("Game over!");
 		}
 			}));
 		myTimeLine.setCycleCount(Animation.INDEFINITE);
@@ -202,8 +200,6 @@ public class AppController implements Initializable {
 		gameOverPane.setStyle("-fx-background-color: rgba(80,80,80, 0.5)");
 		gameOverPane.setVisible(true);
 		userScore = board.getScore();
-		System.out.println("User: " + userName);
-		System.out.println("Score: " + userScore);
 		highScoreHandler.updateScore(userName, userScore, "src/main/resources/highscores.json");
 	}
 	

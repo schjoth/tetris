@@ -24,12 +24,6 @@ public class FileOperations implements FileOperationInterface {
 		    // convert JSON file to map
 		    highscores = new ArrayList<>(Arrays.asList(mapper.readValue(Paths.get(path).toFile(), Score[].class)));
 
-		    // print map entries
-	    	System.out.println("Top 5 scores: ");
-		    for (Score entry : highscores) {
-		        System.out.println(entry.getName() + " = " + entry.getScore());
-		    }
-
 		} catch (Exception ex) {
 		    ex.printStackTrace();
 		}

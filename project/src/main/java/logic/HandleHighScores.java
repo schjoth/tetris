@@ -33,7 +33,6 @@ public class HandleHighScores  {
 	public void saveHighScores(String path) {
 		try {
 			fileOperator.writeToFile(highscores, path);
-			System.out.println("Successfully saved!");
 		} catch (JsonMappingException e) {
 			e.printStackTrace();
 		}

@@ -1,14 +1,14 @@
 package persistanceTests;
 
-import java.util.List; 
+import java.util.List;  
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import logic.HandleHighScores;
 import logic.Score;
 
-public class persistanceTest {
+public class PersistanceTest {
 
 	@Test
 	public void writeToFile() {
@@ -27,6 +27,6 @@ public class persistanceTest {
 		handler.updateScore("Test", 420, "src/test/resources/testScores.json");
 		handler.getHighScoresFromFile("src/test/resources/testScores.json");
 		List<Score> scores = handler.getHighScores();
-		assertNotEquals(0, scores.size());
+		assertFalse(scores.size() == 0);
 	}
 }

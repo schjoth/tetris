@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onKeyPressed="#handleKeyPressed" prefHeight="530.0" prefWidth="621.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AppController">
+<AnchorPane onKeyPressed="#handleKeyPressed" prefHeight="530.0" prefWidth="519.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AppController">
    <children>
       <AnchorPane fx:id="gamePage" prefHeight="530.0" prefWidth="621.0">
          <children>
@@ -61,33 +61,57 @@
             </GridPane>
             <Label layoutX="427.0" layoutY="30.0" text="Tetris">
                <font>
-                  <Font size="43.0" />
+                  <Font name="HeadLineA Regular" size="43.0" />
                </font>
             </Label>
-            <Label layoutX="435.0" layoutY="175.0" text="Top 5 Scores:">
+            <Label layoutX="464.0" layoutY="175.0" text="Top 5 Scores:">
                <font>
-                  <Font size="15.0" />
+                  <Font name="HeadLineA Regular" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="fifthPlace" layoutX="475.0" layoutY="326.0" text="0" />
-            <Label fx:id="fourthPlace" layoutX="475.0" layoutY="301.0" text="0" />
-            <Label fx:id="thirdPlace" layoutX="475.0" layoutY="274.0" text="0" />
-            <Label fx:id="secondPlace" layoutX="475.0" layoutY="249.0" text="0" />
-            <Label fx:id="firstPlace" layoutX="474.0" layoutY="220.0" text="0" />
-            <Button fx:id="handleStartGame" layoutX="438.0" layoutY="381.0" mnemonicParsing="false" onMouseClicked="#handleStartGame" prefWidth="83.0" text="Start Game!" />
+            <Label fx:id="fifthPlace" layoutX="475.0" layoutY="326.0" text="0">
+               <font>
+                  <Font name="HeadLineA Regular" size="13.0" />
+               </font></Label>
+            <Label fx:id="fourthPlace" layoutX="475.0" layoutY="301.0" text="0">
+               <font>
+                  <Font name="HeadLineA Regular" size="13.0" />
+               </font></Label>
+            <Label fx:id="thirdPlace" layoutX="475.0" layoutY="274.0" text="0">
+               <font>
+                  <Font name="HeadLineA Regular" size="13.0" />
+               </font></Label>
+            <Label fx:id="secondPlace" layoutX="475.0" layoutY="249.0" text="0">
+               <font>
+                  <Font name="HeadLineA Regular" size="13.0" />
+               </font></Label>
+            <Label fx:id="firstPlace" layoutX="474.0" layoutY="220.0" text="0">
+               <font>
+                  <Font name="HeadLineA Regular" size="13.0" />
+               </font></Label>
+            <Button fx:id="handleStartGame" layoutX="438.0" layoutY="381.0" mnemonicParsing="false" onMouseClicked="#handleStartGame" prefHeight="26.0" prefWidth="110.0" text="Start Game!">
+               <font>
+                  <Font name="HeadLineA Regular" size="13.0" />
+               </font></Button>
             <Label layoutX="51.0" layoutY="57.0" text="SCORE:">
                <font>
-                  <Font size="15.0" />
+                  <Font name="HeadLineA Regular" size="15.0" />
                </font>
             </Label>
             <Label fx:id="currentScore" layoutX="51.0" layoutY="85.0" text="0">
                <font>
-                  <Font size="35.0" />
+                  <Font name="HeadLineA Regular" size="35.0" />
                </font>
             </Label>
-            <Label layoutX="37.0" layoutY="229.0" text="NEXT BLOCK:" />
+            <Label layoutX="37.0" layoutY="229.0" text="NEXT BLOCK:">
+               <font>
+                  <Font name="HeadLineA Regular" size="13.0" />
+               </font></Label>
             <TextArea disable="true" layoutX="25.0" layoutY="271.0" prefHeight="77.0" prefWidth="103.0" />
-            <Label fx:id="currentPlayerField" layoutX="435.0" layoutY="106.0" text="Label" />
+            <Label fx:id="currentPlayerField" layoutX="448.0" layoutY="106.0" text="Label">
+               <font>
+                  <Font name="HeadLineA Regular" size="13.0" />
+               </font></Label>
             <Pane fx:id="ILabel" disable="true" layoutX="24.0" layoutY="271.0" prefHeight="77.0" prefWidth="103.0" visible="false">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="AQUA" height="17.0" layoutX="39.0" layoutY="31.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
@@ -161,13 +185,75 @@
       <AnchorPane fx:id="userPage" disable="true" prefHeight="530.0" prefWidth="621.0" visible="false">
          <children>
             <TextField fx:id="userNameField" layoutX="231.0" layoutY="291.0" />
-            <Label layoutX="270.0" layoutY="257.0" text="Enter username:" />
-            <Label layoutX="235.0" layoutY="141.0" text="TETRIS">
+            <Label layoutX="263.0" layoutY="255.0" text="Enter username:">
                <font>
-                  <Font size="48.0" />
+                  <Font name="HeadLineA Regular" size="18.0" />
+               </font></Label>
+            <Label layoutX="257.0" layoutY="144.0" text="TETRIS">
+               <font>
+                  <Font name="HeadLineA Regular" size="50.0" />
                </font>
             </Label>
-            <Button layoutX="282.0" layoutY="361.0" mnemonicParsing="false" onMouseClicked="#userNameSubmit" text="Submit" />
+            <Button layoutX="287.0" layoutY="361.0" mnemonicParsing="false" onMouseClicked="#userNameSubmit" text="Submit">
+               <font>
+                  <Font name="HeadLineA Regular" size="13.0" />
+               </font></Button>
+            <Pane disable="true" layoutX="443.0" layoutY="214.0" prefHeight="77.0" prefWidth="103.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff971c" height="17.0" layoutX="33.0" layoutY="45.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff971c" height="17.0" layoutX="33.0" layoutY="28.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff971c" height="17.0" layoutX="33.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff971c" height="17.0" layoutX="48.0" layoutY="45.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+               </children>
+            </Pane>
+            <Pane disable="true" layoutX="43.0" layoutY="123.0" prefHeight="77.0" prefWidth="103.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffd500" height="17.0" layoutX="33.0" layoutY="39.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffd500" height="17.0" layoutX="33.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffd500" height="17.0" layoutX="48.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffd500" height="17.0" layoutX="48.0" layoutY="39.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+               </children>
+            </Pane>
+            <Pane disable="true" layoutX="431.0" layoutY="59.0" prefHeight="77.0" prefWidth="103.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff3113" height="17.0" layoutX="28.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff3113" height="17.0" layoutX="43.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff3113" height="17.0" layoutX="58.0" layoutY="39.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff3113" height="17.0" layoutX="43.0" layoutY="39.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+               </children>
+            </Pane>
+            <Pane disable="true" layoutX="195.0" layoutY="46.0" prefHeight="77.0" prefWidth="103.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="AQUA" height="17.0" layoutX="39.0" layoutY="31.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="AQUA" height="17.0" layoutX="24.0" layoutY="31.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="AQUA" height="17.0" layoutX="69.0" layoutY="31.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="AQUA" height="17.0" layoutX="54.0" layoutY="31.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+               </children>
+            </Pane>
+            <Pane disable="true" layoutX="78.0" layoutY="266.0" prefHeight="77.0" prefWidth="103.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bf00ff" height="17.0" layoutX="27.0" layoutY="39.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bf00ff" height="17.0" layoutX="42.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bf00ff" height="17.0" layoutX="58.0" layoutY="39.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bf00ff" height="17.0" layoutX="42.0" layoutY="39.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="443.0" layoutY="361.0" prefHeight="77.0" prefWidth="103.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="17.0" layoutX="48.0" layoutY="44.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="17.0" layoutX="48.0" layoutY="27.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="17.0" layoutX="48.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="17.0" layoutX="33.0" layoutY="44.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+               </children>
+            </Pane>
+            <Pane disable="true" layoutX="92.0" layoutY="400.0" prefHeight="77.0" prefWidth="103.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff3113" height="17.0" layoutX="28.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff3113" height="17.0" layoutX="43.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff3113" height="17.0" layoutX="58.0" layoutY="39.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff3113" height="17.0" layoutX="43.0" layoutY="39.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+               </children>
+            </Pane>
          </children>
       </AnchorPane>
    </children>
