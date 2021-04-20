@@ -49,7 +49,7 @@ public class Board {
 	
 	private boolean moveX(int distance, boolean isOverlapping) {
 		if (!isOverlapping) {
-			updatePlacement(true);
+			removeTrace();
 		}
 		
 		boolean isSpaceAvailable = checkSpaceX(posX + distance);
@@ -57,7 +57,7 @@ public class Board {
 			posX += distance;
 		}
 		
-		updatePlacement(false);
+		placeBlock();
 		return isSpaceAvailable;
 	}
 	
@@ -65,24 +65,24 @@ public class Board {
 		moveDown(1, false);
 	}
 	
-	private void moveDown(int distance, boolean isOverlapping) {
+	private void moveDown(int distance, boolean isOverlapping) {		
 		score += distance;
 		
 		if (!isOverlapping) {
-			updatePlacement(true);
+			removeTrace();
 		}
 		
 		if (!checkSpaceY(posY + distance)) {
-			updatePlacement(false);
+			placeBlock();
 			insertNewBlock();
 		} else {
 			posY += distance;
 		}
-		updatePlacement(false);
+		placeBlock();
 	}
 	
 	public void hardDrop() {
-		updatePlacement(true);
+		removeTrace();
 		int i = posY;
 		while (i < getRowLength()) {
 			i++;
@@ -94,14 +94,14 @@ public class Board {
 		score += (i - posY) * 10;
 		
 		posY = i;
-		updatePlacement(false);
+		placeBlock();
 		insertNewBlock();
 	}
 	
 	private Boolean checkSpaceY(int y) {
 		try {
 			boolean spaceBelow = Coordinates.getCoorinatesForShape(currentShape, posX, y, getColumnLength()).stream()
-				.map(coo -> getTile(coo.getX(), coo.getY()) == null || coo.getY() == getColumnLength())
+				.map(coo -> getTile(coo.getX(), coo.getY()) == null || coo.getY() == getRowLength())
 				.reduce((a,b) -> a && b)
 				.get();     
 			if (spaceBelow == false) throw new IllegalStateException();
@@ -131,12 +131,19 @@ public class Board {
 		return true;
 	}
 	
+	private void removeTrace() {
+		updateColor(false);
+	}
 	
-	private void updatePlacement(boolean deleteTrace) {
+	private void placeBlock() {
+		updateColor(true);
+	}
+	
+	private void updateColor(boolean color) {
 		Coordinates.getCoorinatesForShape(currentShape, posX, posY, getColumnLength())
 			.forEach(coo -> board.get(coo.getY())
 				.set(coo.getX(),
-					deleteTrace ? null : currentShape.color));
+					color ? currentShape.color : null ));
 	}
 	
 	public Shape getNextShape() {
@@ -156,6 +163,8 @@ public class Board {
 				.get()) {
 			gameOver = true;
 		};
+		
+		placeBlock();
 	}
 	
 	private void checkForClearedLines() {
@@ -209,13 +218,13 @@ public class Board {
 	}
 
 	public boolean rotateShape() {
-		updatePlacement(true);
+		removeTrace();
 		try { 
 			currentShape.rotateRight();
 			if(!checkSpaceX(posX) || !checkSpaceY(posY)) {
 				throw new IllegalStateException();
 			} else {
-				updatePlacement(false);
+				placeBlock();
 			}
 		} catch (IndexOutOfBoundsException | IllegalStateException e) {
 			if (checkSpaceX(posX + 1) && posX < getColumnLength() - 1) {
@@ -232,7 +241,7 @@ public class Board {
 				moveDown(2, true);
 			} else {
 				currentShape.rotateLeft();
-				updatePlacement(false);
+				placeBlock();
 				return false;
 			}
 		}
