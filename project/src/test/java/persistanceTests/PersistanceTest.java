@@ -29,4 +29,13 @@ public class PersistanceTest {
 		List<Score> scores = handler.getHighScores();
 		assertFalse(scores.size() == 0);
 	}
+	
+	@Test
+	public void readFromEmptyFile() {
+		HandleHighScores handler = new HandleHighScores();
+		handler.getHighScoresFromFile("src/test/resources/EmptyTestScore.json");
+		List<Score> scores = handler.getHighScores();
+		assertTrue(scores != null);
+		assertTrue(scores.size() == 0);
+	}
 }

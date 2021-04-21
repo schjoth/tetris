@@ -41,7 +41,7 @@ public class FileOperations implements FileOperationInterface {
 		    highscores = new ArrayList<>(Arrays.asList(mapper.readValue(Paths.get(path).toFile(), Score[].class)));
 
 		} catch (MismatchedInputException e) {
-			System.out.println("det finnes ingen highscores");
+			System.out.println("There are no highscores");
 			highscores = new ArrayList<>();
 		} catch (IOException ex) {
 		    ex.printStackTrace();
