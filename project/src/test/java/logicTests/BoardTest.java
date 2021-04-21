@@ -53,7 +53,7 @@ public class BoardTest {
 	}
 
 	@Test
-	public void tilePlaced() {
+	public void testTilePlaced() {
 		board.hardDrop();
 		List<List<String>> gameBoard =  board.getBoard();
 		assertTrue(gameBoard.stream()

@@ -59,14 +59,13 @@ public class AppController implements Initializable {
 	private Board board;
     private String userName;
     private int userScore;
-    HandleHighScores highScoreHandler;
+    private HandleHighScores highScoreHandler;
     private Timeline myTimeLine;
     
     
     /**
      *  Initializer setter hvilke sider og komponenter som skal være synlige fra start.
      */
-    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 		userPage.setDisable(false);
@@ -134,7 +133,6 @@ public class AppController implements Initializable {
 	 * Denne metoden kalles når man får game over, samt når man ankommer "spillsiden".
 	 * Den leser highscores fra fil, legger dem i en liste, og viser scores i 5 forskjellige labels.   
 	 */
-	@FXML
 	public void updateScores() {
 		highScoreHandler.getHighScoresFromFile("src/main/resources/highscores.json");
 		List<Score> newScores = highScoreHandler.getHighScores();
@@ -215,7 +213,6 @@ public class AppController implements Initializable {
 	 * Ved hjelp av getNextShape() metoden finner man ut av hvilken shape som kommer etter den nåværende.
 	 * Deretter skjuler man alle labels som ikke er den gitte formen, slik at den vises i ruten. 
 	 */
-	
 	public void showNext() {
 		JLabel.setVisible(false);
 		ILabel.setVisible(false);
@@ -227,7 +224,6 @@ public class AppController implements Initializable {
 		
 		
 		switch(board.getNextShape().color) {
-		
 			case JShape.color: JLabel.setVisible(true);  break;
 			case IShape.color: ILabel.setVisible(true); break;
 			case SShape.color: SLabel.setVisible(true);  break;
@@ -236,7 +232,6 @@ public class AppController implements Initializable {
 			case ZShape.color: ZLabel.setVisible(true); break;
 			case LShape.color: LLabel.setVisible(true);  break;
 		}
-		
 	}
 	
 	
@@ -246,7 +241,6 @@ public class AppController implements Initializable {
 	 * Til slutt oppdaterer man highscores i tilfelle den nye scoren er blant topp 5.
 	 *  
 	 */
-	
 	public void gameOver() {
 		myTimeLine.stop();
 		gameOverPane.setStyle("-fx-background-color: rgba(80,80,80, 0.5)");
