@@ -1,12 +1,15 @@
 package persistance;
 
-import java.io.FileWriter; 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 
 import logic.Score;
 
@@ -22,6 +25,10 @@ public class FileOperations implements FileOperationInterface {
 	 * 
 	 * @param path
 	 * @return 
+	 * @throws IOException 
+	 * @throws  
+	 * @throws JsonMappingException 
+	 * @throws JsonParseException 
 	 * 
 	 */
 	public List<Score> readFromFile(String path) {
@@ -33,8 +40,12 @@ public class FileOperations implements FileOperationInterface {
 		    // convert JSON file to map
 		    highscores = new ArrayList<>(Arrays.asList(mapper.readValue(Paths.get(path).toFile(), Score[].class)));
 
-		} catch (Exception ex) {
+		} catch (MismatchedInputException e) {
+			System.out.println("There are no highscores");
+			highscores = new ArrayList<>();
+		} catch (IOException ex) {
 		    ex.printStackTrace();
+		    highscores = new ArrayList<>();
 		}
 		return highscores;
 	}
