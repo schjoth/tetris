@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import logic.Board;
 import shape.Shape;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -14,24 +15,24 @@ import java.util.List;
 
 public class BoardTest {
 	private Board board;
-	
+
 	@BeforeEach
 	public void setup() {
 		board = new Board(10,20);
 		board.insertNewBlock();
 	}
-	
+
 	@Test
 	public void testIllegalArguments() {
 		assertThrows(IllegalArgumentException.class, () -> new Board(0, 1));
 		assertThrows(IllegalArgumentException.class, () -> new Board(1, 0));
 	}
-	
+
 	@Test
 	public void testGetNextShape() {
 		assertTrue(board.getNextShape() instanceof Shape);
 	}
-	
+
 	@Test
 	public void testMoveLeftAndRight() {
 		int initialPosX = board.getPosX();
@@ -40,16 +41,17 @@ public class BoardTest {
 		assertTrue(board.moveLeft());
 		assertTrue(board.getPosX() == initialPosX);
 	}
-	
+
 	@Test
 	public void testMoveDownAndHardDrop() {
 		int initialPosY = board.getPosY();
 		board.moveDown();
 		assertTrue(board.getPosY() == initialPosY + 1);
+		assertFalse(board.getTile(board.getPosX(), board.getPosY()) == null);
 		board.hardDrop();
 		assertTrue(board.getPosY() == initialPosY);
 	}
-	
+
 	@Test
 	public void tilePlaced() {
 		board.hardDrop();
@@ -58,14 +60,14 @@ public class BoardTest {
 			.anyMatch(list -> list.stream()
 					.anyMatch(color -> color != null)));
 	}
-	
+
 	@Test
 	public void testRotate() {
 		board.moveDown();
 		board.moveDown();
 		assertTrue(board.rotateShape());
 	}
-	
+
 	@Test
 	public void testGameOver() {
 		int counter = 0;
@@ -75,7 +77,7 @@ public class BoardTest {
 		}
 		assertTrue(board.isGameOver());
 	}
-	
+
 	@Test
 	public void checkIfScoreUpdates() {
 		assertTrue(board.getScore() == 0);
