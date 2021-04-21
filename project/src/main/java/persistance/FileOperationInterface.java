@@ -1,9 +1,7 @@
 package persistance;
 
 import java.util.List;
-
 import com.fasterxml.jackson.databind.JsonMappingException;
-
 import logic.Score;
 
 public interface FileOperationInterface {
