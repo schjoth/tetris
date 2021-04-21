@@ -15,7 +15,7 @@
 
 <AnchorPane onKeyPressed="#handleKeyPressed" prefHeight="530.0" prefWidth="519.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AppController">
    <children>
-      <AnchorPane fx:id="gamePage" disable="true" prefHeight="530.0" prefWidth="621.0" visible="false">
+      <AnchorPane fx:id="gamePage" prefHeight="530.0" prefWidth="621.0">
          <children>
             <GridPane fx:id="gameGrid" blendMode="DARKEN" hgap="1.0" layoutX="139.0" layoutY="31.0" prefHeight="471.0" prefWidth="230.0" style="-fx-border-width: 1; -fx-border-color: black; -fx-background-insets: 0, 1, 1, 1, 1;" vgap="1.0">
               <columnConstraints>
@@ -182,7 +182,7 @@
             <Insets />
          </opaqueInsets>
       </AnchorPane>
-      <AnchorPane fx:id="userPage" disable="true" prefHeight="530.0" prefWidth="621.0">
+      <AnchorPane fx:id="userPage" disable="true" prefHeight="530.0" prefWidth="621.0" visible="false">
          <children>
             <TextField fx:id="userNameField" layoutX="231.0" layoutY="291.0" />
             <Label layoutX="263.0" layoutY="255.0" text="Enter username:">
