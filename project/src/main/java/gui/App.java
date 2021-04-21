@@ -11,7 +11,7 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent root = (Parent) fxmlLoader.load(this.getClass().getResourceAsStream("App.fxml"));
+        Parent root = (Parent) fxmlLoader.load(this.getClass().getResourceAsStream("/App.fxml"));
         primaryStage.setTitle("Tetris");
         Scene scene = new Scene(root, 621, 530);
         primaryStage.setScene(scene);
