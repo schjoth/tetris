@@ -25,10 +25,7 @@ public class CoordinatesTest {
 		
 		Collection<Coordinates> coordinates = Coordinates.getCoorinatesForShape(square, 4, 8, 20);
 		
-		assertNotNull(coordinates);
-		
-		// TODO: denne.
-		
+		assertNotNull(coordinates);		
 	}
 	
 }

@@ -22,6 +22,10 @@ public class Score implements Comparable<Score>{
 		return score;
 	}
 
+	/**
+	 * Implementerer Comparable slik at score-objektene kan sorteres i HandleHighScores-klassen.
+	 */
+	
 	@Override
 	public int compareTo(Score o) {
 		return o.score - this.score;

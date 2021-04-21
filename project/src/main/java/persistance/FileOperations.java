@@ -15,6 +15,15 @@ public class FileOperations implements FileOperationInterface {
 	public static FileWriter file;
 	
 	
+	/**
+	 *  Opretter en liste med score-objekter.
+	 *  Bruker en ObjectMapper til å hente ut json fra fil med path gitt som parameter.
+	 *  Legger disse verdiene inn i highscores-lista, og returnerer denne.
+	 * 
+	 * @param path
+	 * @return 
+	 * 
+	 */
 	public List<Score> readFromFile(String path) {
 		List<Score> highscores = null;
 		try {
@@ -29,6 +38,14 @@ public class FileOperations implements FileOperationInterface {
 		}
 		return highscores;
 	}
+	
+	/**
+	 * Bruker en ObjectMapper til å skrive verdiene i highscores-listen til fil med path gitt som parameter.
+	 * 
+	 * @param highscores
+	 * @param path
+	 * 
+	 */
 	
 	public void writeToFile(List<Score> highscores, String path) throws JsonMappingException {
 		// create object mapper instance

@@ -55,12 +55,17 @@ public class AppController implements Initializable {
 	
 	
     
-//    private Coordinates currentPos;
+
 	private Board board;
     private String userName;
     private int userScore;
     HandleHighScores highScoreHandler;
     private Timeline myTimeLine;
+    
+    
+    /**
+     *  Initializer setter hvilke sider og komponenter som skal være synlige fra start.
+     */
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -70,6 +75,12 @@ public class AppController implements Initializable {
 		gamePage.setVisible(false);
 		gameOverPane.setVisible(false);
     }
+    
+    /**
+     *  Når "submit"-knappen trykkes, blir inputet validert, og den rette siden blir synlig.
+     *  Inputet blir også representert i currentPlayerField.
+     *  En highScoreHandler blir også instansiert, hvor man leser highscores fra fil.
+     */
     
 	@FXML
 	public void userNameSubmit() {
@@ -87,6 +98,14 @@ public class AppController implements Initializable {
 		}
 	}
     
+	
+	/**
+	 *  Når man trykker på "start game" blir et board instansiert.
+	 *  De forskjellige komponentene blir satt til synlige/ikke synlige ettersom hva som skal vises.
+	 *  Her er det også en TimeLine som oppdateres hvert 0.5 sekund. Da kalles moveDown() fra board, samt score blir oppdatert.
+	 *  Denne er satt til å kjøre uendelig, men dersom det er gameOver(), vil gameOver() kalles, og TimeLinen stoppes.
+	 */
+	
 	@FXML
 	public void handleStartGame() {
 		board = new Board(10, 20);
@@ -110,6 +129,11 @@ public class AppController implements Initializable {
 	    myTimeLine.play();
 	}
 	
+	
+	/**
+	 * Denne metoden kalles når man får game over, samt når man ankommer "spillsiden".
+	 * Den leser highscores fra fil, legger dem i en liste, og viser scores i 5 forskjellige labels.   
+	 */
 	@FXML
 	public void updateScores() {
 		highScoreHandler.getHighScoresFromFile("src/main/resources/highscores.json");
@@ -123,6 +147,13 @@ public class AppController implements Initializable {
         }
 	
 		
+	/**
+	 * 
+	 * Når board er instansiert vil denne funksjonen kalles hver gang en knapp trykkes. 
+	 * Blokken blir deretter flyttet i forhold til hvilken knapp som trykkes.
+	 * 
+	 * @param e
+	 */
 	@FXML 
 	public void handleKeyPressed(KeyEvent e) {
 		if (this.board == null) {
@@ -160,6 +191,11 @@ public class AppController implements Initializable {
 		}
 	}
 	
+	/**
+	 * 
+	 * Her fjerner vi først alt fra gridet, og deretter itererer man gjennom listene, og farger koordinatene som skal farges.
+	 * 
+	 */
 	public void updateGrid() {
 		gameGrid.getChildren().clear();
 		for (int y = 0; y < gameGrid.getRowCount(); y++) {
@@ -174,6 +210,11 @@ public class AppController implements Initializable {
 		}
 		showNext();
 	}
+	
+	/**
+	 * Ved hjelp av getNextShape() metoden finner man ut av hvilken shape som kommer etter den nåværende.
+	 * Deretter skjuler man alle labels som ikke er den gitte formen, slik at den vises i ruten. 
+	 */
 	
 	public void showNext() {
 		JLabel.setVisible(false);
@@ -197,6 +238,14 @@ public class AppController implements Initializable {
 		}
 		
 	}
+	
+	
+	/**
+	 * Når spillet er over kalles gameOver(), da stopper man TimeLinen, slik at sillet ikke fortsetter.
+	 * Deretter synliggjør vi en game over side, og gjør "start game" knappen tilgjengelig igjen. 
+	 * Til slutt oppdaterer man highscores i tilfelle den nye scoren er blant topp 5.
+	 *  
+	 */
 	
 	public void gameOver() {
 		myTimeLine.stop();
