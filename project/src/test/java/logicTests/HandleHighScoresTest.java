@@ -1,9 +1,7 @@
 package logicTests;
 
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-
+import static org.junit.jupiter.api.Assertions.assertNotEquals; 
 import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import logic.HandleHighScores;
 import logic.Score;
@@ -20,6 +18,5 @@ public class HandleHighScoresTest {
 		
 		List<Score> newScores = handler.getHighScores();
 		assertNotEquals(scores.toArray(), newScores.toArray());
-	
 	}
 }
