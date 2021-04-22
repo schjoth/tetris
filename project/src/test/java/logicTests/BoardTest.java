@@ -98,8 +98,8 @@ public class BoardTest {
 		
 		for (int i = 0; i < board.getRowLength(); i++) {
 			for (int j = 0; j < board.getColumnLength(); j++) {
-				int x = i;
-				int y = j;
+				int x = j;
+				int y = i;
 				assertDoesNotThrow(() -> board.getTile(x,y));
 			}
 		}
