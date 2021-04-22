@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import logic.Board;
 import shape.Shape;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -53,7 +54,7 @@ public class BoardTest {
 	}
 
 	@Test
-	public void tilePlaced() {
+	public void testTilePlaced() {
 		board.hardDrop();
 		List<List<String>> gameBoard =  board.getBoard();
 		assertTrue(gameBoard.stream()
@@ -86,5 +87,21 @@ public class BoardTest {
 		assertTrue(scoreAfterMoveDown > 0);
 		board.hardDrop();
 		assertTrue(board.getScore() > scoreAfterMoveDown);
+	}
+	
+	@Test
+	public void testGetTile() {
+		assertThrows(IllegalArgumentException.class, () -> board.getTile(-1,0));
+		assertThrows(IllegalArgumentException.class, () -> board.getTile(0,-1));
+		assertThrows(IllegalArgumentException.class, () -> board.getTile(0, board.getRowLength()));
+		assertThrows(IllegalArgumentException.class, () -> board.getTile(board.getColumnLength(), 0));
+		
+		for (int i = 0; i < board.getRowLength(); i++) {
+			for (int j = 0; j < board.getColumnLength(); j++) {
+				int x = i;
+				int y = j;
+				assertDoesNotThrow(() -> board.getTile(x,y));
+			}
+		}
 	}
 }
