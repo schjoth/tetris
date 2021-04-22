@@ -1,5 +1,6 @@
 package persistance;
 
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -40,7 +41,7 @@ public class FileOperations implements FileOperationInterface {
 		    // convert JSON file to map
 		    highscores = new ArrayList<>(Arrays.asList(mapper.readValue(Paths.get(path).toFile(), Score[].class)));
 
-		} catch (MismatchedInputException e) {
+		} catch (MismatchedInputException | FileNotFoundException e) {
 			System.out.println("There are no highscores");
 			highscores = new ArrayList<>();
 		} catch (IOException ex) {
